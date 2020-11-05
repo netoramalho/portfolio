@@ -1,5 +1,7 @@
 # portfolio
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/4d52e13d-22a9-4c14-ae24-ac727d6aa81d/deploy-status)](https://app.netlify.com/sites/netoramalho/deploys)
+
 ## Build Setup
 
 ```bash
