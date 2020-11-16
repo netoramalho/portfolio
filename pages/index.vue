@@ -1,19 +1,19 @@
 <template>
   <div>
     <header data-aos="fade-in" data-aos-delay="300">
-      <div class="wrap" data-aos="zoom-in">
-        <div class="greeting">
+      <div class="wrap">
+        <div class="greeting" data-aos="zoom-out-up" data-aos-delay="700">
           Hey! I am
         </div>
-        <div class="headline1">
+        <div class="headline1" data-aos="zoom-out-up" data-aos-delay="800">
           Neto Ramalho
         </div>
-        <div class="about">
+        <div class="about" data-aos="zoom-out-up" data-aos-delay="900">
           a self-taught developer based in Curitiba, Brazil
         </div>
-        <button>
-          Get In Touch
-        </button>
+        <div class="wrap-btn" data-aos="zoom-out-up" data-aos-delay="1000">
+          <button>Get In Touch</button>
+        </div>
       </div>
     </header>
     <div class="projects" data-aos="zoom-out-up">
@@ -66,6 +66,11 @@ header {
   font-size: clamp(2rem, 5.556vw, 7.5rem);
   color: #FFFFFF;
   font-weight: 700;
+  margin-left: -0.3vw;
+
+  @media screen and (max-width: 600px){
+    margin-left: -0.15vw;
+  }
 }
 
 .about {
@@ -84,12 +89,13 @@ button {
   padding: 10px 25px;
   background: transparent;
   cursor: pointer;
-  transition: all 0.2s ease-in-out;
 
   font-family: 'DM Sans', sans-serif;
   font-size: 14px;
   font-weight: 400;
   color: #4E8BFE;
+
+  transition: all 0.2s ease-in-out;
 
   &:hover {
     background: #4E8BFE;

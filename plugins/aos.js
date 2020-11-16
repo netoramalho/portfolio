@@ -6,7 +6,7 @@ export default ({ app }) => {
   app.AOS = new AOS.init({
     disable: 'phone',
     offset: -10,
-    duration: 600,
+    duration: 300,
     easing: 'ease-in',
     once: true
   })
