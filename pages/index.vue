@@ -1,14 +1,14 @@
 <template>
   <div>
     <header data-aos="fade-in" data-aos-delay="300">
-      <div class="wrap">
+      <div class="content">
         <div class="greeting" data-aos="zoom-out-up" data-aos-delay="700">
           Hey! I am
         </div>
-        <div class="headline1" data-aos="zoom-out-up" data-aos-delay="800">
+        <div class="headline" data-aos="zoom-out-up" data-aos-delay="800">
           Neto Ramalho
         </div>
-        <div class="about" data-aos="zoom-out-up" data-aos-delay="900">
+        <div class="subtitle about" data-aos="zoom-out-up" data-aos-delay="900">
           a self-taught developer based in Curitiba, Brazil
         </div>
         <div class="wrap-btn" data-aos="zoom-out-up" data-aos-delay="1000">
@@ -16,11 +16,65 @@
         </div>
       </div>
     </header>
-    <div class="projects" data-aos="zoom-out-up">
-      <div class="headline1">
+    <div class="section content projects">
+      <div class="headline" data-aos="zoom-out-up" data-aos-delay="300">
         Projects
       </div>
+      <div class="list">
+        <div class="project" data-aos="zoom-out-up" data-aos-delay="450">
+          <div class="preview">
+            <img src="~@/assets/projects/conecta.png" alt="ConectaLead Screen shots">
+          </div>
+          <div class="description">
+            <div class="wrap">
+              <div class="headline2">
+                ConectaLead
+              </div>
+              <div class="subtitle">
+                A leads integration plataform focused on the real state field.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="project reverse" data-aos="zoom-out-up" data-aos-delay="450">
+          <div class="preview">
+            <img src="~@/assets/projects/gsp.png" alt="GetSetPro Screen shots">
+          </div>
+          <div class="description">
+            <div class="wrap">
+              <div class="headline2">
+                GetSetPro
+              </div>
+              <div class="subtitle">
+                A responsive PWA that servers the Eye Doctors field with many features, such as letting they update their website content.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+    <div class="section content contact" data-aos="zoom-out-up">
+      <div class="headline">
+        Get in Touch
+      </div>
+      <div class="subtitle">
+        My inbox is always open. Whether you have a question or just want to say hi, I'll try my best to get back to you!
+      </div>
+      <div class="wrap-btn">
+        <a href="mailto:netto.ramalho@gmail.com">
+          <button>Say Hello</button>
+        </a>
+      </div>
+    </div>
+    <footer class="content">
+      <div class="built-by">
+        Designed & Built by Neto Ramalho
+      </div>
+      <div class="stack">
+        Using Vue.JS and Nuxt.JS
+      </div>
+    </footer>
   </div>
 </template>
 
@@ -29,6 +83,12 @@ export default {}
 </script>
 
 <style lang="scss">
+
+.content {
+  padding: 0 8vw;
+  width: 100%;
+}
+
 header {
   min-height: #{"min(100vw, 100vh)"};
 
@@ -41,17 +101,13 @@ header {
   background-position: bottom center;
   background-size: cover;
 
-  .wrap {
-    margin: 0 8vw;
-  }
-
   @media screen and (max-width: 600px){
     align-items: flex-end;
     margin-bottom: 150px;
     background-position: 60%;
 
-    .wrap {
-      margin-bottom: -100px;
+    .content {
+      margin-bottom: -120px;
     }
   }
 }
@@ -63,8 +119,8 @@ header {
   padding-bottom: 3px;
 }
 
-.headline1 {
-  font-size: clamp(2rem, 5.556vw, 7.5rem);
+.headline {
+  font-size: clamp(2rem, 5.556vw, 6rem);
   color: #FFFFFF;
   font-weight: 700;
   margin-left: -0.3vw;
@@ -74,10 +130,25 @@ header {
   }
 }
 
-.about {
-  font-size: clamp(0.8rem, 1.3vw, 1.25rem);
+.headline2 {
+  font-size: clamp(1.875rem, 3.472vw, 3.75rem);
+  color: #FFFFFF;
+  font-weight: 700;
+  margin-left: -0.3vw;
+
+  @media screen and (max-width: 600px){
+    margin-left: -0.15vw;
+  }
+}
+
+.subtitle {
+  font-size: clamp(0.9rem, 1.3vw, 1.25rem);
   font-weight: 400;
   color: rgba(255, 255, 255, 0.8);
+  line-height: 148.2%;
+}
+
+.about {
   margin-top: 5px;
   margin-bottom: 25px;
 }
@@ -87,7 +158,7 @@ button {
   border: #4E8BFE solid 1px;
   border-radius: 4px;
   text-decoration: none;
-  padding: 11px 25px;
+  padding: 9px 21px;
   background: transparent;
   cursor: pointer;
 
@@ -103,7 +174,96 @@ button {
   }
 }
 
-.projects {
-  height: 800px;color: white;margin: 0 8vw; margin-top: 50px;text-align:center;
+.section {
+  text-align: center;
+  padding-top: 100px;
+  padding-bottom: 50px;
+}
+
+.contact {
+  .subtitle {
+    max-width: 540px;
+    margin: 40px auto;
+    line-height: 150%;
+  }
+}
+
+footer {
+  text-align: center;
+  letter-spacing: 0.11em;
+  margin: 50px 0;
+
+  .built-by {
+    color: #FFFFFF;
+    padding-bottom: 10px;;
+  }
+
+  .stack {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.6);
+  }
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 5vw;
+
+  .project {
+    display: flex;
+    flex-flow: row wrap;
+    width: 100%;
+    padding: 3vw 0;
+
+    &.reverse {
+      flex-direction: row-reverse;
+
+      .description {
+        display: flex;
+        flex-direction: row-reverse;
+      }
+    }
+
+    .preview {
+      background: #6353A5;
+      width: 65%;
+      min-height: 40vw;
+
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+
+      img {
+        max-height: 85%;
+        border-radius: 10px 10px 0 0;
+        max-width: 75%;
+      }
+    }
+
+    .description {
+      width: 40%;
+      margin: 0 -5%;
+
+      display: flex;
+      align-items: center;
+      text-align: left;
+
+      .wrap {
+        max-width: 500px;
+      }
+    }
+
+    @media screen and (max-width: 900px){
+      .preview {
+        width: 100%;
+      }
+      .description {
+        margin: 0;
+        width: 100%;
+        margin: 20px 0;
+      }
+    }
+  }
 }
 </style>
