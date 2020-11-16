@@ -28,9 +28,9 @@
 export default {}
 </script>
 
-<style>
+<style lang="scss">
 header {
-  min-height: min(100vw, 100vh);
+  min-height: #{"min(100vw, 100vh)"};
 
   display: flex;
   align-items: center;
@@ -40,20 +40,19 @@ header {
   background-repeat: no-repeat;
   background-position: bottom center;
   background-size: cover;
-}
 
-.wrap {
-  margin: 0 8vw;
-}
+  .wrap {
+    margin: 0 8vw;
+  }
 
-@media screen and (max-width: 600px){
-  header {
+  @media screen and (max-width: 600px){
     align-items: flex-end;
     margin-bottom: 150px;
     background-position: 60%;
-  }
-  .wrap {
-    margin-bottom: -100px;
+
+    .wrap {
+      margin-bottom: -100px;
+    }
   }
 }
 
@@ -72,7 +71,7 @@ header {
 .about {
   font-size: clamp(0.8rem, 1.3vw, 1.25rem);
   font-weight: 400;
-  color: rgb(255 255 255 / 80%);
+  color: rgba(255, 255, 255, 0.8);
   margin-top: 5px;
   margin-bottom: 20px;
 }
@@ -91,11 +90,11 @@ button {
   font-size: 14px;
   font-weight: 400;
   color: #4E8BFE;
-}
 
-button:hover {
-  background: #4E8BFE;
-  color: white;
+  &:hover {
+    background: #4E8BFE;
+    color: white;
+  }
 }
 
 .projects {

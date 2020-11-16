@@ -24,4 +24,9 @@ html {
   box-sizing: border-box;
   margin: 0;
 }
+
+::selection {
+  color: white;
+  background: #3764ba;
+}
 </style>
