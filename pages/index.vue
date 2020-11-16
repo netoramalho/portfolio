@@ -33,6 +33,22 @@
               <div class="subtitle">
                 A leads integration plataform focused on the real state field.
               </div>
+              <div class="stack">
+                <div class="category">
+                  FRONT-END
+                </div>
+                <div class="tech">
+                  Vue.js, Vuetify, Cypress
+                </div>
+              </div>
+              <div class="stack">
+                <div class="category">
+                  BACK-END
+                </div>
+                <div class="tech">
+                  PHP/Laravel, MySQL
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -48,6 +64,22 @@
               </div>
               <div class="subtitle">
                 A responsive PWA that servers the Eye Doctors field with many features, such as letting they update their website content.
+              </div>
+              <div class="stack">
+                <div class="category">
+                  FRONT-END
+                </div>
+                <div class="tech">
+                  Angular, Material
+                </div>
+              </div>
+              <div class="stack">
+                <div class="category">
+                  BACK-END
+                </div>
+                <div class="tech">
+                  PHP/Laravel, PostgreSQL
+                </div>
               </div>
             </div>
           </div>
@@ -176,8 +208,7 @@ button {
 
 .section {
   text-align: center;
-  padding-top: 100px;
-  padding-bottom: 50px;
+  padding-top: 5vw;
 }
 
 .contact {
@@ -214,7 +245,7 @@ footer {
     display: flex;
     flex-flow: row wrap;
     width: 100%;
-    padding: 3vw 0;
+    padding-bottom: 3vw;
 
     &.reverse {
       flex-direction: row-reverse;
@@ -252,6 +283,23 @@ footer {
       .wrap {
         max-width: 500px;
       }
+
+      .stack {
+        color: #FFF;
+        margin-top: 40px;
+
+        .category {
+          font-weight: 500;
+          font-size: 14px;
+        }
+
+        .tech {
+          font-size: clamp(0.938rem, 1.250vw, 1.25rem);
+          color: #FFFFFF;
+          letter-spacing: 0.11em;
+          margin-top: 5px;
+        }
+      }
     }
 
     @media screen and (max-width: 900px){
@@ -262,6 +310,10 @@ footer {
         margin: 0;
         width: 100%;
         margin: 20px 0;
+
+        .wrap {
+          max-width: 100%;
+        }
       }
     }
   }
