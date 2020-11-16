@@ -60,6 +60,7 @@ header {
   font-size: clamp(0.875rem, 1.111vw, 1.125rem);
   color: #4E8BFE;
   font-weight: 400;
+  padding-bottom: 3px;
 }
 
 .headline1 {
@@ -78,7 +79,7 @@ header {
   font-weight: 400;
   color: rgba(255, 255, 255, 0.8);
   margin-top: 5px;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
 }
 
 button {
@@ -86,20 +87,19 @@ button {
   border: #4E8BFE solid 1px;
   border-radius: 4px;
   text-decoration: none;
-  padding: 10px 25px;
+  padding: 11px 25px;
   background: transparent;
   cursor: pointer;
 
   font-family: 'DM Sans', sans-serif;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 400;
   color: #4E8BFE;
 
   transition: all 0.2s ease-in-out;
 
   &:hover {
-    background: #4E8BFE;
-    color: white;
+    background: rgba(78, 139, 254, 0.1);
   }
 }
 
