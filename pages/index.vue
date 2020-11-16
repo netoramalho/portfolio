@@ -11,9 +11,9 @@
         <div class="subtitle about" data-aos="zoom-out-up" data-aos-delay="900">
           a self-taught developer based in Curitiba, Brazil
         </div>
-        <div class="wrap-btn" data-aos="zoom-out-up" data-aos-delay="1000">
+        <!-- <div class="wrap-btn" data-aos="zoom-out-up" data-aos-delay="1000">
           <button>Get In Touch</button>
-        </div>
+        </div> -->
       </div>
     </header>
     <div class="section content projects">
@@ -208,7 +208,7 @@ button {
 
 .section {
   text-align: center;
-  padding-top: 5vw;
+  padding-bottom: 8vw;
 }
 
 .contact {
@@ -226,7 +226,8 @@ footer {
 
   .built-by {
     color: #FFFFFF;
-    padding-bottom: 10px;;
+    padding-bottom: 10px;
+    font-size: clamp(13px, 4vw, 16px);
   }
 
   .stack {
@@ -260,18 +261,25 @@ footer {
       background: #6353A5;
       width: 65%;
       min-height: 40vw;
+      border-radius: 10px;
 
       display: flex;
       align-items: flex-end;
       justify-content: center;
 
+      transition: all 0.2s ease-in-out;
+
+      z-index: 1000;
+
       img {
         max-height: 85%;
-        border-radius: 10px 10px 0 0;
         max-width: 75%;
       }
-    }
 
+      &:hover {
+        transform: scale(0.95);
+      }
+    }
     .description {
       width: 40%;
       margin: 0 -5%;
@@ -279,6 +287,8 @@ footer {
       display: flex;
       align-items: center;
       text-align: left;
+
+      z-index: 2000;
 
       .wrap {
         max-width: 500px;
@@ -302,7 +312,7 @@ footer {
       }
     }
 
-    @media screen and (max-width: 900px){
+    @media screen and (max-width: 850px){
       .preview {
         width: 100%;
       }
