@@ -11,6 +11,9 @@
         <div class="about">
           a self-taught developer based in Curitiba, Brazil
         </div>
+        <button>
+          Get In Touch
+        </button>
       </div>
     </header>
     <div class="projects" data-aos="zoom-out-up">
@@ -27,20 +30,31 @@ export default {}
 
 <style>
 header {
-  height: min(88vw, 100vh);
-  background-image: url('~@/assets/cover.jpg');
-  background-color: #000;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
+  min-height: min(100vw, 100vh);
 
   display: flex;
-  align-items: flex-start;
+  align-items: center;
+
+  background-image: url('~@/assets/cover.jpg');
+  background-color: #000;
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  background-size: cover;
 }
 
 .wrap {
   margin: 0 8vw;
-  margin-top: 40vh;
+}
+
+@media screen and (max-width: 600px){
+  header {
+    align-items: flex-end;
+    margin-bottom: 150px;
+    background-position: 60%;
+  }
+  .wrap {
+    margin-bottom: -100px;
+  }
 }
 
 .greeting {
@@ -58,40 +72,33 @@ header {
 .about {
   font-size: clamp(0.8rem, 1.3vw, 1.25rem);
   font-weight: 400;
-  color: #FFFFFF;
+  color: rgb(255 255 255 / 80%);
+  margin-top: 5px;
+  margin-bottom: 20px;
+}
+
+button {
+  display: inline-block;
+  border: #4E8BFE solid 1px;
+  border-radius: 4px;
+  text-decoration: none;
+  padding: 10px 25px;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #4E8BFE;
+}
+
+button:hover {
+  background: #4E8BFE;
+  color: white;
 }
 
 .projects {
   height: 800px;color: white;margin: 0 8vw; margin-top: 50px;text-align:center;
-}
-
-.title {
-  font-family:
-    'Quicksand',
-    'Source Sans Pro',
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    'Helvetica Neue',
-    Arial,
-    sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
 }
 </style>
