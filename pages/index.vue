@@ -1,21 +1,6 @@
 <template>
   <div>
-    <header data-aos="fade-in" data-aos-delay="300">
-      <div class="content">
-        <div class="greeting" data-aos="zoom-out-up" data-aos-delay="700">
-          Hey! I am
-        </div>
-        <div class="headline" data-aos="zoom-out-up" data-aos-delay="800">
-          Neto Ramalho
-        </div>
-        <div class="subtitle about" data-aos="zoom-out-up" data-aos-delay="900">
-          a self-taught developer based in Curitiba, Brazil
-        </div>
-        <!-- <div class="wrap-btn" data-aos="zoom-out-up" data-aos-delay="1000">
-          <button>Get In Touch</button>
-        </div> -->
-      </div>
-    </header>
+    <Cover />
     <div class="section content projects">
       <div class="headline" data-aos="zoom-out-up" data-aos-delay="300">
         Projects
@@ -86,27 +71,8 @@
         </div>
       </div>
     </div>
-    <div class="section content contact" data-aos="zoom-out-up">
-      <div class="headline">
-        Get in Touch
-      </div>
-      <div class="subtitle">
-        My inbox is always open. Whether you have a question or just want to say hi, I'll try my best to get back to you!
-      </div>
-      <div class="wrap-btn">
-        <a href="mailto:netto.ramalho@gmail.com">
-          <button>Say Hello</button>
-        </a>
-      </div>
-    </div>
-    <footer class="content">
-      <div class="built-by">
-        Designed & Built by Neto Ramalho
-      </div>
-      <div class="stack">
-        Using Vue.JS and Nuxt.JS
-      </div>
-    </footer>
+    <Contact />
+    <Footer />
   </div>
 </template>
 
@@ -115,40 +81,9 @@ export default {}
 </script>
 
 <style lang="scss">
-
 .content {
   padding: 0 8vw;
   width: 100%;
-}
-
-header {
-  min-height: #{"min(100vw, 100vh)"};
-
-  display: flex;
-  align-items: center;
-
-  background-image: url('~@/assets/cover.jpg');
-  background-color: #000;
-  background-repeat: no-repeat;
-  background-position: bottom center;
-  background-size: cover;
-
-  @media screen and (max-width: 600px){
-    align-items: flex-end;
-    margin-bottom: 150px;
-    background-position: 60%;
-
-    .content {
-      margin-bottom: -120px;
-    }
-  }
-}
-
-.greeting {
-  font-size: clamp(0.875rem, 1.111vw, 1.125rem);
-  color: #4E8BFE;
-  font-weight: 400;
-  padding-bottom: 3px;
 }
 
 .headline {
@@ -180,11 +115,6 @@ header {
   line-height: 148.2%;
 }
 
-.about {
-  margin-top: 5px;
-  margin-bottom: 25px;
-}
-
 button {
   display: inline-block;
   border: #4E8BFE solid 1px;
@@ -209,31 +139,6 @@ button {
 .section {
   text-align: center;
   padding-bottom: 8vw;
-}
-
-.contact {
-  .subtitle {
-    max-width: 540px;
-    margin: 40px auto;
-    line-height: 150%;
-  }
-}
-
-footer {
-  text-align: center;
-  letter-spacing: 0.11em;
-  margin: 50px 0;
-
-  .built-by {
-    color: #FFFFFF;
-    padding-bottom: 10px;
-    font-size: clamp(13px, 4vw, 16px);
-  }
-
-  .stack {
-    font-size: 14px;
-    color: rgba(255, 255, 255, 0.6);
-  }
 }
 
 .list {
