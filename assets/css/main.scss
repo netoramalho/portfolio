@@ -4,12 +4,17 @@
   --primary: 78, 139, 254;
   --secondary: 99, 83, 165;
 
-  @media (prefers-color-scheme: light) {
-      --background: white;
-      --text: 92, 102, 109;
-      --primary: 43, 131, 191;
-      --secondary: 205, 218, 227;
-  }
+  --cover-image: url('~@/assets/cover.jpg');
+  --cover-margin: 0;
+}
+
+[data-theme="light"] {
+  --background: white;
+  --text: 92, 102, 109;
+  --primary: 43, 131, 191;
+  --secondary: 205, 218, 227;
+  --cover-image: url('~@/assets/cover-light.jpg');
+  --cover-margin: 15vw;
 }
 
 html {
@@ -21,9 +26,12 @@ html {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
-  background: var(--background);
   overflow-x: hidden;
-  transition: background 1s ease-in-out;
+}
+
+body {
+  background-color: var(--background);
+  transition: background-color 1s ease-in-out;
 }
 
 *,

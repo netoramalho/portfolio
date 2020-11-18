@@ -24,17 +24,15 @@ header {
   display: flex;
   align-items: center;
 
-  background-image: url('~@/assets/cover.jpg');
   background-color: var(--background);
+  background-image: var(--cover-image);
   background-repeat: no-repeat;
   background-position: bottom center;
   background-size: cover;
 
-  @media (prefers-color-scheme: light) {
-    background-image: url('~@/assets/cover-light.jpg');
-    .content {
-      margin-bottom: 15vw;
-    }
+  .content {
+    transition: margin-bottom 0.8s ease-in-out;
+    margin-bottom: var(--cover-margin);
   }
 
   @media screen and (max-width: 600px){

@@ -1,5 +1,6 @@
 <template>
   <div>
+    <ThemeSwitcher />
     <Cover />
     <Projects />
     <Contact />
