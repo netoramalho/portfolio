@@ -1,5 +1,6 @@
 <template>
   <header data-aos="fade-in" data-aos-delay="300">
+    <div class="bg" />
     <div class="content">
       <div class="greeting" data-aos="zoom-out-up" data-aos-delay="700">
         Hey! I am
@@ -19,16 +20,11 @@
 
 <style lang="scss" scoped>
 header {
+  position: relative;
   min-height: #{"min(100vw, 100vh)"};
 
   display: flex;
   align-items: center;
-
-  background-color: var(--background);
-  background-image: var(--cover-image);
-  background-repeat: no-repeat;
-  background-position: bottom center;
-  background-size: cover;
 
   .content {
     transition: margin-bottom 0.8s ease-in-out;
@@ -38,11 +34,29 @@ header {
   @media screen and (max-width: 600px){
     align-items: flex-end;
     margin-bottom: 150px;
-    background-position: 60%;
 
     .content {
       margin-bottom: -120px;
     }
+  }
+}
+
+.bg {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100vw;
+
+  background-color: var(--background);
+  background-image: var(--cover-image);
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  background-size: cover;
+
+  transition: background-image 1s linear, background-color 1s linear;
+
+  @media screen and (max-width: 600px){
+    background-position: 60%;
   }
 }
 
