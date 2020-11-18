@@ -1,6 +1,5 @@
 <template>
   <header data-aos="fade-in" data-aos-delay="300">
-    <div class="bg" />
     <div class="content">
       <div class="greeting" data-aos="zoom-out-up" data-aos-delay="700">
         Hey! I am
@@ -27,36 +26,25 @@ header {
   display: flex;
   align-items: center;
 
-  .content {
-    transition: margin-bottom 0.8s ease-in-out;
-    margin-bottom: var(--cover-margin);
-  }
-
-  @media screen and (max-width: 600px){
-    align-items: flex-end;
-    margin-bottom: 150px;
-
-    .content {
-      margin-bottom: -120px;
-    }
-  }
-}
-
-.bg {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-
   background-color: var(--background);
   background-image: var(--cover-image);
   background-repeat: no-repeat;
   background-position: bottom center;
   background-size: cover;
 
-  @media screen and (max-width: 600px){
+  .content {
+    transition: margin-bottom 0.8s ease-in-out;
+    margin-bottom: var(--cover-margin);
+  }
+
+  @media screen and (max-width: 500px){
+    align-items: flex-end;
+    margin-bottom: 150px;
     background-position: 60%;
+
+    .content {
+      margin-bottom: -120px;
+    }
   }
 }
 
