@@ -50,7 +50,7 @@
 }
 
 .preview {
-  background: #6353A5;
+  background: rgba(var(--secondary), 1);
   width: 65%;
   min-height: 40vw;
   border-radius: 10px;
@@ -88,7 +88,7 @@
   }
 
   .stack {
-    color: #FFF;
+    color: rgba(var(--text), 1);
     margin-top: 40px;
 
     .category {
@@ -98,7 +98,6 @@
 
     .tech {
       font-size: clamp(0.938rem, 1.250vw, 1.25rem);
-      color: #FFFFFF;
       letter-spacing: 0.11em;
       margin-top: 5px;
     }

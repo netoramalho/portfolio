@@ -25,7 +25,7 @@ header {
   align-items: center;
 
   background-image: url('~@/assets/cover.jpg');
-  background-color: #000;
+  background-color: var(--background);
   background-repeat: no-repeat;
   background-position: bottom center;
   background-size: cover;
@@ -43,7 +43,7 @@ header {
 
 .greeting {
   font-size: clamp(0.875rem, 1.111vw, 1.125rem);
-  color: #4E8BFE;
+  color: rgba(var(--primary), 1);
   font-weight: 400;
   padding-bottom: 3px;
 }

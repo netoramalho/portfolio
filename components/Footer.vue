@@ -17,13 +17,13 @@ footer {
 }
 
 .built-by {
-  color: #FFFFFF;
+  color: rgba(var(--text), 1);
   padding-bottom: 10px;
   font-size: clamp(13px, 4vw, 16px);
 }
 
 .stack {
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(var(--text), 0.6);
 }
 </style>

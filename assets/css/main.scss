@@ -1,3 +1,35 @@
+:root {
+  --background: black;
+  --text: 255, 255, 255;
+  --primary: 78, 139, 254;
+  --secondary: 99, 83, 165;
+}
+
+html {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  word-spacing: 1px;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+  background: var(--background);
+  overflow-x: hidden;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+::selection {
+  color: white;
+  background: #3764ba;
+}
+
 .content {
   padding: 0 8vw;
   width: 100%;
@@ -10,7 +42,7 @@
 
 .headline {
   font-size: clamp(2rem, 5.556vw, 6rem);
-  color: #FFFFFF;
+  color: rgba(var(--text), 1);
   font-weight: 700;
   margin-left: -0.3vw;
 
@@ -21,7 +53,7 @@
 
 .headline2 {
   font-size: clamp(1.875rem, 3.472vw, 3.75rem);
-  color: #FFFFFF;
+  color: rgba(var(--text), 1);
   font-weight: 700;
   margin-left: -0.3vw;
 
@@ -33,13 +65,13 @@
 .subtitle {
   font-size: clamp(0.9rem, 1.3vw, 1.25rem);
   font-weight: 400;
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(var(--text), 0.8);
   line-height: 148.2%;
 }
 
 button {
   display: inline-block;
-  border: #4E8BFE solid 1px;
+  border: rgba(var(--primary), 1) solid 1px;
   border-radius: 4px;
   text-decoration: none;
   padding: 9px 21px;
@@ -49,11 +81,11 @@ button {
   font-family: 'DM Sans', sans-serif;
   font-size: 15px;
   font-weight: 400;
-  color: #4E8BFE;
+  color: rgba(var(--primary), 1);
 
   transition: all 0.2s ease-in-out;
 
   &:hover {
-    background: rgba(78, 139, 254, 0.1);
+    background: rgba(var(--primary), 0.1);
   }
 }
