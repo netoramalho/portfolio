@@ -21,6 +21,7 @@
 <style lang="scss" scoped>
 header {
   position: relative;
+  min-height: 60vw;
   min-height: #{"min(100vw, 100vh)"};
 
   display: flex;
