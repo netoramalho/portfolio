@@ -3,6 +3,13 @@
   --text: 255, 255, 255;
   --primary: 78, 139, 254;
   --secondary: 99, 83, 165;
+
+  @media (prefers-color-scheme: light) {
+      --background: white;
+      --text: 92, 102, 109;
+      --primary: 43, 131, 191;
+      --secondary: 205, 218, 227;
+  }
 }
 
 html {
@@ -16,6 +23,7 @@ html {
   box-sizing: border-box;
   background: var(--background);
   overflow-x: hidden;
+  transition: background 1s ease-in-out;
 }
 
 *,

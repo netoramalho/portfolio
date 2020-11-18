@@ -30,6 +30,13 @@ header {
   background-position: bottom center;
   background-size: cover;
 
+  @media (prefers-color-scheme: light) {
+    background-image: url('~@/assets/cover-light.jpg');
+    .content {
+      margin-bottom: 15vw;
+    }
+  }
+
   @media screen and (max-width: 600px){
     align-items: flex-end;
     margin-bottom: 150px;
