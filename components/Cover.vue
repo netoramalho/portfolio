@@ -21,7 +21,7 @@
 <style lang="scss" scoped>
 header {
   position: relative;
-  min-height: 60vh;
+  min-height: 90vh;
   min-height: #{"min(100vw, 100vh)"};
 
   display: flex;
@@ -61,6 +61,7 @@ header {
 }
 
 .greeting {
+  font-size: 1rem;
   font-size: clamp(0.875rem, 1.111vw, 1.125rem);
   color: rgba(var(--primary), 1);
   font-weight: 400;
