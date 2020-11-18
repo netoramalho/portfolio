@@ -55,8 +55,6 @@ header {
   background-position: bottom center;
   background-size: cover;
 
-  transition: background-image 1s linear, background-color 1s linear;
-
   @media screen and (max-width: 600px){
     background-position: 60%;
   }
