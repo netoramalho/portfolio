@@ -53,7 +53,6 @@
   background: rgba(var(--secondary), 1);
   width: 65%;
   max-height: 40vw;
-  height: auto;
   border-radius: 10px;
 
   display: flex;
@@ -105,6 +104,7 @@
   .preview {
     width: 100%;
     max-height: 60vh;
+    height: auto;
   }
   .description {
     margin: 0;
