@@ -47,7 +47,7 @@
 export default {
   data () {
     return {
-      theme: ''
+      theme: 'dark'
     }
   },
   watch: {
@@ -55,13 +55,7 @@ export default {
       this.applyTheme()
     }
   },
-  mounted () {
-    window.onNuxtReady(() => {
-      this.theme = this.getSystemPreferedTheme()
-    })
-  },
   methods: {
-    getSystemPreferedTheme: () => window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark',
     applyTheme () {
       document.documentElement.setAttribute('data-theme', this.theme)
     }
