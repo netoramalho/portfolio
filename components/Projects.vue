@@ -7,7 +7,7 @@
       <Project
         cover="conecta.png"
         name="Conecta"
-        description="A leads integration plataform focused on the real state field."
+        description="A leads integration platform focused on the real state field."
         front="Vue.js, Vuetify, Cypress"
         back="PHP/Laravel, MySQL"
       />
@@ -15,9 +15,29 @@
         reverse
         cover="gsp.png"
         name="GetSetPro"
-        description="A responsive PWA that servers the Eye Doctors field with many features, such as letting they update their website content."
+        description="A PWA-Responsive that serves the Eye Doctors field, with features such as a website content manager."
         front="Angular, Material"
         back="PHP/Laravel, PostgreSQL"
+      />
+      <Project
+        cover="eye-doctor-finder.png"
+        name="Doctor Finder"
+        description="An Eye Doctor Finder interface for Think About Your Eyes."
+        front="Vue.js, Leaflet"
+      />
+      <Project
+        reverse
+        cover="batevolta.png"
+        name="BateVoltaApp"
+        description="A social platform for planning and scheduling day trips focused on sports practice. Shipped for iOS and Android."
+        front="TitaniumJS"
+      />
+      <Project
+        cover="imoobiliario.png"
+        name="Imoobiliario"
+        description="A real state portal avaliable on web, and native mobile app."
+        front="AngularJS, Material, TitaniumJS"
+        back="NodeJS, Express"
       />
     </div>
   </div>

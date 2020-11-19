@@ -52,7 +52,7 @@
 .preview {
   background: rgba(var(--secondary), 1);
   width: 65%;
-  min-height: 40vw;
+  height: 40vw;
   border-radius: 10px;
 
   display: flex;
@@ -64,12 +64,8 @@
   z-index: 1000;
 
   img {
-    max-height: 85%;
+    max-height: 90%;
     max-width: 75%;
-  }
-
-  &:hover {
-    transform: scale(0.95);
   }
 }
 
@@ -107,6 +103,7 @@
 @media screen and (max-width: 850px){
   .preview {
     width: 100%;
+    height: 60vh;
   }
   .description {
     margin: 0;
@@ -139,14 +136,10 @@ export default {
       type: String,
       default: 'Teste'
     },
-    front: {
-      type: String,
-      default: 'Teste'
-    },
-    back: {
-      type: String,
-      default: 'Teste'
-    }
+    // eslint-disable-next-line vue/require-default-prop
+    front: String,
+    // eslint-disable-next-line vue/require-default-prop
+    back: String
   }
 }
 </script>
