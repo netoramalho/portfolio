@@ -37,7 +37,7 @@
   display: flex;
   flex-flow: row wrap;
   width: 100%;
-  padding-bottom: 3vw;
+  padding-bottom: 5vw;
 
   &.reverse {
     flex-direction: row-reverse;
@@ -52,7 +52,8 @@
 .preview {
   background: rgba(var(--secondary), 1);
   width: 65%;
-  height: 40vw;
+  max-height: 40vw;
+  height: auto;
   border-radius: 10px;
 
   display: flex;
@@ -103,7 +104,7 @@
 @media screen and (max-width: 850px){
   .preview {
     width: 100%;
-    height: 60vh;
+    max-height: 60vh;
   }
   .description {
     margin: 0;

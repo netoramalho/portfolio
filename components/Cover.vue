@@ -10,9 +10,11 @@
       <div class="subtitle about" data-aos="zoom-out-up" data-aos-delay="900">
         a self-taught developer based in Curitiba, Brazil
       </div>
-      <!-- <div class="wrap-btn" data-aos="zoom-out-up" data-aos-delay="1000">
-        <button>Get In Touch</button>
-      </div> -->
+      <div class="wrap-btn" data-aos="zoom-out-up" data-aos-delay="1000">
+        <button @click="scrollToContact">
+          Get In Touch
+        </button>
+      </div>
     </div>
   </header>
 </template>
@@ -61,3 +63,13 @@ header {
   margin-bottom: 25px;
 }
 </style>
+
+<script>
+export default {
+  methods: {
+    scrollToContact () {
+      document.getElementById('contact').scrollIntoView(true)
+    }
+  }
+}
+</script>

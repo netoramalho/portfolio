@@ -1,5 +1,5 @@
 <template>
-  <div class="section content" data-aos="zoom-out-up">
+  <div id="contact" class="section content" data-aos="zoom-out-up">
     <div class="headline">
       Get in Touch
     </div>
