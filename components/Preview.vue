@@ -1,7 +1,7 @@
 <template>
   <div class="preview" @click="next()" @mouseover="play()" @mouseleave="stop()">
     <div v-show="!isSingleImage" class="indicator">
-      <div v-for="(item, index) in images" :key="index" class="bar" :class="{active: current > index, current: current === index}">
+      <div v-for="(item, index) in images" :key="index" class="bar" :class="{active: current > index, current: timer && current === index}">
         <div class="inProgress" />
       </div>
     </div>
@@ -13,9 +13,9 @@
 
 <style lang="scss" scoped>
 .preview {
-  background: rgba(var(--secondary), 1);
+  background: rgba(var(--secondary), 0.9);
   width: 65%;
-  max-height: 38vw;
+  height: 38vw;
   border-radius: 10px;
   user-select: none;
 
@@ -28,6 +28,10 @@
   z-index: 1000;
 
   overflow: hidden;
+
+  &:hover {
+    background: rgba(var(--secondary), 1);
+  }
 
   .images {
     display: flex;
@@ -42,11 +46,6 @@
       user-select: none;
     }
   }
-}
-
-@keyframes progress {
-    0% { width: 0% }
-    100% { width: 100% }
 }
 
 .indicator {
@@ -87,8 +86,15 @@
 @media screen and (max-width: 850px){
   .preview {
     width: 100%;
-    max-height: 60vh;
-    height: auto;
+    height: 50vh;
+
+    .images {
+      align-items: center;
+
+      img {
+        max-width: 85%;
+      }
+    }
   }
 }
 </style>

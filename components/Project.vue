@@ -1,8 +1,6 @@
 <template>
   <div class="project" :class="{'reverse': reverse}" data-aos="zoom-out-up" data-aos-delay="450">
-    <div class="preview">
-      <img :src="require(`~/assets/projects/${cover}`)">
-    </div>
+    <Preview :images="images" />
     <div class="description">
       <div class="wrap">
         <div class="headline2">
@@ -49,25 +47,25 @@
   }
 }
 
-.preview {
-  background: rgba(var(--secondary), 1);
-  width: 65%;
-  max-height: 40vw;
-  border-radius: 10px;
+// .preview {
+//   background: rgba(var(--secondary), 1);
+//   width: 65%;
+//   max-height: 40vw;
+//   border-radius: 10px;
 
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
+//   display: flex;
+//   align-items: flex-end;
+//   justify-content: center;
 
-  transition: all 0.2s ease-in-out;
+//   transition: all 0.2s ease-in-out;
 
-  z-index: 1000;
+//   z-index: 1000;
 
-  img {
-    max-height: 90%;
-    max-width: 75%;
-  }
-}
+//   img {
+//     max-height: 90%;
+//     max-width: 75%;
+//   }
+// }
 
 .description {
   width: 40%;
@@ -101,11 +99,11 @@
 }
 
 @media screen and (max-width: 850px){
-  .preview {
-    width: 100%;
-    max-height: 60vh;
-    height: auto;
-  }
+  // .preview {
+  //   width: 100%;
+  //   max-height: 60vh;
+  //   height: auto;
+  // }
   .description {
     margin: 0;
     width: 100%;
@@ -125,9 +123,9 @@ export default {
       type: Boolean,
       default: false
     },
-    cover: {
-      type: String,
-      default: 'Teste'
+    // eslint-disable-next-line vue/require-default-prop
+    images: {
+      type: Array
     },
     name: {
       type: String,
