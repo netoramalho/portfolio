@@ -1,5 +1,5 @@
 <template>
-  <div class="preview" @click="next()" @mouseover="play()" @mouseleave="stop()">
+  <div v-observe-visibility="{callback: visibilityChanged,throttle: 300,intersection:{threshold:1}}" class="preview" :class="{playing: timer}">
     <div v-show="!isSingleImage" class="indicator">
       <div v-for="(item, index) in images" :key="index" class="bar" :class="{active: current > index, current: timer && current === index}">
         <div class="inProgress" />
@@ -29,7 +29,7 @@
 
   overflow: hidden;
 
-  &:hover {
+  &.playing {
     background: rgba(var(--secondary), 1);
   }
 
@@ -85,7 +85,9 @@
 
 @media screen and (max-width: 850px){
   .preview {
-    width: 100%;
+    width: 100vw;
+    border-radius: 0;
+    margin: 0 -8vw;
     height: 50vh;
 
     .images {
@@ -131,11 +133,12 @@ export default {
   methods: {
     play () {
       this.stop()
-      this.timer = setTimeout(this.next, 2000)
+      this.timer = setInterval(this.next, 2000)
     },
     stop () {
       if (this.timer) {
-        clearTimeout(this.timer)
+        clearInterval(this.timer)
+        this.timer = false
       }
     },
     next () {
@@ -148,8 +151,9 @@ export default {
       this.current = this.nextImage
 
       this.viewportImages.push(this.images[this.nextImage])
-
-      this.play()
+    },
+    visibilityChanged (isVisible) {
+      isVisible ? this.play() : this.stop()
     }
   }
 }
