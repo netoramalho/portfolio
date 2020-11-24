@@ -104,9 +104,9 @@
 <script>
 export default {
   props: {
-    // eslint-disable-next-line vue/require-default-prop
     images: {
-      type: Array
+      type: Array,
+      required: true
     }
   },
   data () {

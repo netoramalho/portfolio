@@ -4,7 +4,11 @@
   "front": "AngularJS, Material, TitaniumJS",
   "back": "NodeJS, Express",
   "images": [
-    "imoobiliario.png"
+    "imoobiliario/desktop-list.png",
+    "imoobiliario/desktop-detail.png",
+    "imoobiliario/mobile-menu.png",
+    "imoobiliario/mobile-list.png",
+    "imoobiliario/mobile-detail.png"
   ],
   "date": "2016-01-01"
 }

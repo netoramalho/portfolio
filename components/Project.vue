@@ -37,35 +37,17 @@
   width: 100%;
   padding-bottom: 5vw;
 
-  &.reverse {
-    flex-direction: row-reverse;
-
-    .description {
-      display: flex;
+  @media screen and (min-width: 851px){
+    &.reverse {
       flex-direction: row-reverse;
+
+      .description {
+        display: flex;
+        flex-direction: row-reverse;
+      }
     }
   }
 }
-
-// .preview {
-//   background: rgba(var(--secondary), 1);
-//   width: 65%;
-//   max-height: 40vw;
-//   border-radius: 10px;
-
-//   display: flex;
-//   align-items: flex-end;
-//   justify-content: center;
-
-//   transition: all 0.2s ease-in-out;
-
-//   z-index: 1000;
-
-//   img {
-//     max-height: 90%;
-//     max-width: 75%;
-//   }
-// }
 
 .description {
   width: 40%;
@@ -99,11 +81,6 @@
 }
 
 @media screen and (max-width: 850px){
-  // .preview {
-  //   width: 100%;
-  //   max-height: 60vh;
-  //   height: auto;
-  // }
   .description {
     margin: 0;
     width: 100%;
