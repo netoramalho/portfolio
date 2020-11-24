@@ -1,3 +1,7 @@
+![GitHub Actions](https://github.com/netoramalho/portfolio/workflows/ci/badge.svg)
+![Netlify Status](https://api.netlify.com/api/v1/badges/4d52e13d-22a9-4c14-ae24-ac727d6aa81d/deploy-status)
+![Storybook](https://raw.githubusercontent.com/storybooks/brand/master/badge/badge-storybook.svg)
+
 # portfolio
 
 ## Build Setup
