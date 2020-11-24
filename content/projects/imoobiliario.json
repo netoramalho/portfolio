@@ -2,7 +2,7 @@
   "name": "Imoobiliario",
   "description": "A real state portal avaliable on web, and native mobile app.",
   "front": "AngularJS, Material, TitaniumJS",
-  "back": "NodeJS, Express",
+  "back": "NodeJS, Express, MongoDB",
   "images": [
     "imoobiliario/desktop-list.png",
     "imoobiliario/desktop-detail.png",
