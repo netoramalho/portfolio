@@ -1,0 +1,10 @@
+{
+  "name": "GetSetPro",
+  "description": "A PWA-Responsive that serves the Eye Doctors field, with features such as a website content manager.",
+  "front": "Angular, Material",
+  "back": "PHP/Laravel, PostgreSQL",
+  "images": [
+    "gsp.png"
+  ],
+  "date": "2019-01-01"
+}

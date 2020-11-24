@@ -1,5 +1,5 @@
 <template>
-  <div v-observe-visibility="{callback: visibilityChanged,throttle: 300,intersection:{threshold:1}}" class="preview" :class="{playing: timer}">
+  <div v-observe-visibility="{callback: visibilityChanged,throttle: 300,intersection:{threshold:0.9}}" class="preview" :class="{playing: timer}">
     <div v-show="!isSingleImage" class="indicator">
       <div v-for="(item, index) in images" :key="index" class="bar" :class="{active: current > index, current: timer && current === index}">
         <div class="inProgress" />

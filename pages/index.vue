@@ -2,15 +2,20 @@
   <div>
     <ThemeSwitcher />
     <Cover />
-    <Projects />
+    <Projects :projects="projects" />
     <Contact />
     <Footer />
   </div>
 </template>
 
-<script>
-export default {}
-</script>
-
 <style lang="scss">
 </style>
+
+<script>
+export default {
+  async asyncData ({ $content }) {
+    const projects = await $content('projects').sortBy('date', 'desc').fetch()
+    return { projects }
+  }
+}
+</script>

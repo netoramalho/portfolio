@@ -123,17 +123,17 @@ export default {
       type: Boolean,
       default: false
     },
-    // eslint-disable-next-line vue/require-default-prop
     images: {
-      type: Array
+      type: Array,
+      required: true
     },
     name: {
       type: String,
-      default: 'Teste'
+      required: true
     },
     description: {
       type: String,
-      default: 'Teste'
+      required: true
     },
     // eslint-disable-next-line vue/require-default-prop
     front: String,

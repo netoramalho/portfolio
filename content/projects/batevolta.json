@@ -1,0 +1,14 @@
+{
+  "name": "BateVoltaApp",
+  "description": "A social platform for planning and scheduling day trips focused on sports practice. Shipped for iOS and Android.",
+  "front": "TitaniumJS",
+  "images": [
+    "batevolta/explore.png",
+    "batevolta/details.png",
+    "batevolta/chat.png",
+    "batevolta/faq.png",
+    "batevolta/new.png",
+    "batevolta/profile.png"
+  ],
+  "date": "2017-03-01"
+}
