@@ -8,8 +8,9 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
-      { name: 'theme-color', content: '#ffffff' }
+      { hid: 'description', name: 'description', content: 'Checkout my portfolio!' },
+      { name: 'theme-color', content: '#ffffff' },
+      { property: 'og:image', content: '/ogimage.png' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/icons/favicon.ico' },
