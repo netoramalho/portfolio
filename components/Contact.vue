@@ -78,9 +78,11 @@
     padding: 18px 15px;
     transition: all 0.2s ease;
 
-    &:hover {
-      background: rgba(var(--text), 0.1);
-      transform: scale(1.05);
+    @media (hover: hover) {
+      &:hover {
+        background: rgba(var(--text), 0.1);
+        transform: scale(1.05);
+      }
     }
   }
 
