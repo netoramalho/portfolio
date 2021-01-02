@@ -1,16 +1,16 @@
 <template>
-  <header data-aos="fade-in" data-aos-delay="300">
+  <header>
     <div class="content">
-      <div class="greeting" data-aos="zoom-out-up" data-aos-delay="700">
+      <div class="greeting">
         Hey! I am
       </div>
-      <div class="headline" data-aos="zoom-out-up" data-aos-delay="800">
+      <div class="headline">
         Neto Ramalho
       </div>
-      <div class="subtitle about" data-aos="zoom-out-up" data-aos-delay="900">
+      <div class="subtitle about">
         a self-taught developer based in Curitiba, Brazil
       </div>
-      <div class="wrap-btn" data-aos="zoom-out-up" data-aos-delay="1000">
+      <div class="wrap-btn">
         <button @click="scrollToContact">
           Get In Touch
         </button>

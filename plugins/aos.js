@@ -5,7 +5,6 @@ export default ({ app }) => {
   // eslint-disable-next-line new-cap
   app.AOS = new AOS.init({
     disable: 'phone',
-    startEvent: 'load',
     offset: -10,
     duration: 300,
     easing: 'ease-in',
