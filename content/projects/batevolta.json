@@ -3,12 +3,12 @@
   "description": "A social platform for planning and scheduling day trips focused on sports practice. Shipped for iOS and Android.",
   "front": "TitaniumJS",
   "images": [
-    "batevolta/explore.png",
-    "batevolta/details.png",
-    "batevolta/chat.png",
-    "batevolta/faq.png",
-    "batevolta/new.png",
-    "batevolta/profile.png"
+    "batevolta/explore.webp",
+    "batevolta/details.webp",
+    "batevolta/chat.webp",
+    "batevolta/faq.webp",
+    "batevolta/new.webp",
+    "batevolta/profile.webp"
   ],
   "date": "2017-03-01"
 }
