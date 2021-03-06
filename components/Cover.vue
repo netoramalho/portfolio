@@ -20,6 +20,15 @@
 </template>
 
 <style lang="scss" scoped>
+@keyframes scaleUp {
+  from {transform: scale(1.2);opacity: 0;}
+  to {transform: scale(1);opacity: 1;}
+}
+@keyframes slideUp {
+  from {transform: translateY(20%);opacity: 0;}
+  to {transform: translateY(0);opacity: 1;}
+}
+
 header {
   position: relative;
   min-height: 90vh;
@@ -34,9 +43,19 @@ header {
   background-position: bottom center;
   background-size: cover;
 
+  transform: scale(1.2);
+  opacity: 0;
+  animation: scaleUp 1s;
+  animation-fill-mode: forwards;
+
   .content {
     transition: margin-bottom 0.8s ease-in-out;
     margin-bottom: var(--cover-margin);
+    transform: translateY(20%);
+    opacity: 0;
+    animation: slideUp 1s;
+    animation-fill-mode: forwards;
+    animation-delay: 1s;
   }
 
   @media screen and (max-width: 500px){
