@@ -26,11 +26,7 @@ export default {
       { rel: 'icon', type: 'type', sizes: '192x192', href: '/icons/android-icon-192x192.png' },
       { rel: 'icon', type: 'type', sizes: '32x32', href: '/icons/favicon-32x32.png' },
       { rel: 'icon', type: 'type', sizes: '96x96', href: '/icons/favicon-96x96.png' },
-      { rel: 'icon', type: 'type', sizes: '16x16', href: '/icons/favicon-16x16.png' },
-      {
-        rel: 'stylesheet',
-        href: 'https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700'
-      }
+      { rel: 'icon', type: 'type', sizes: '16x16', href: '/icons/favicon-16x16.png' }
     ]
   },
 
@@ -60,7 +56,8 @@ export default {
 
   // Modules (https://go.nuxtjs.dev/config-modules)
   modules: [
-    '@nuxt/content'
+    '@nuxt/content',
+    '@nuxtjs/google-fonts'
   ],
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
@@ -69,5 +66,15 @@ export default {
 
   // Storybook Options
   storybook: {
+  },
+
+  // Google Fonts
+  googleFonts: {
+    families: {
+      'DM+Sans': {
+        wght: [40, 500, 700]
+      }
+    },
+    display: 'swap'
   }
 }
