@@ -6,7 +6,14 @@
       </div>
     </div>
     <div class="images">
-      <img v-for="(image, index) in viewportImages" v-show="index === 0" :key="image" :src="require(`~/assets/projects/${image}`)" draggable="false">
+      <img
+        v-for="(image, index) in viewportImages"
+        v-show="index === 0"
+        :key="image"
+        :src="require(`~/assets/projects/${image}`)"
+        draggable="false"
+        loading="lazy"
+      >
     </div>
   </div>
 </template>
