@@ -72,7 +72,7 @@ export default {
   googleFonts: {
     families: {
       'DM+Sans': {
-        wght: [40, 500, 700]
+        wght: [400, 500, 700]
       }
     },
     display: 'swap'
