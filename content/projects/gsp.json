@@ -4,14 +4,14 @@
   "front": "Angular, Material",
   "back": "PHP/Laravel, PostgreSQL",
   "images": [
-    "gsp/menu-desktop.png",
-    "gsp/menu-mobile.png",
-    "gsp/location-desktop.png",
-    "gsp/location-mobile.png",
-    "gsp/hours-desktop.png",
-    "gsp/hours-mobile.png",
-    "gsp/team-desktop.png",
-    "gsp/team-mobile.png"
+    "gsp/menu-desktop.webp",
+    "gsp/menu-mobile.webp",
+    "gsp/location-desktop.webp",
+    "gsp/location-mobile.webp",
+    "gsp/hours-desktop.webp",
+    "gsp/hours-mobile.webp",
+    "gsp/team-desktop.webp",
+    "gsp/team-mobile.webp"
   ],
   "date": "2019-12-01"
 }

@@ -4,14 +4,14 @@
   "front": "Vue.js, Vuetify, Cypress",
   "back": "PHP/Laravel, MySQL",
   "images": [
-    "conecta/desktop-distribution.png",
-    "conecta/mobile-distribution.png",
-    "conecta/desktop-plan.png",
-    "conecta/mobile-plan.png",
-    "conecta/desktop-users.png",
-    "conecta/mobile-users.png",
-    "conecta/mobile-add-user.png",
-    "conecta/mobile-more.png"
+    "conecta/desktop-distribution.webp",
+    "conecta/mobile-distribution.webp",
+    "conecta/desktop-plan.webp",
+    "conecta/mobile-plan.webp",
+    "conecta/desktop-users.webp",
+    "conecta/mobile-users.webp",
+    "conecta/mobile-add-user.webp",
+    "conecta/mobile-more.webp"
   ],
   "date": "2020-02-01"
 }
