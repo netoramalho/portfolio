@@ -19,11 +19,21 @@
 </template>
 
 <style lang="scss" scoped>
+@keyframes fade {
+  from {opacity: 0}
+  to {opacity: 1}
+}
 .list {
   display: flex;
   flex-direction: column;
   width: 100%;
   margin-top: 5vw;
+}
+.projects {
+  opacity: 0;
+  animation: fade 0.5s;
+  animation-fill-mode: forwards;
+  animation-delay: 2s;
 }
 </style>
 
