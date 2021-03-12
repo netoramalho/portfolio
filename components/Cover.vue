@@ -11,9 +11,9 @@
         a self-taught developer based in Curitiba, Brazil
       </div>
       <div class="wrap-btn">
-        <button @click="scrollToContact">
+        <a href="#contact">
           Get In Touch
-        </button>
+        </a>
       </div>
     </div>
   </header>
@@ -80,6 +80,28 @@ header {
 .about {
   margin-top: 5px;
   margin-bottom: 25px;
+}
+
+a {
+  display: inline-block;
+  border: rgba(var(--primary), 1) solid 1px;
+  border-radius: 4px;
+  text-decoration: none;
+  padding: 9px 21px;
+  background: transparent;
+  cursor: pointer;
+  text-decoration: none;
+
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  color: rgba(var(--primary), 1);
+
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    background: rgba(var(--primary), 0.1);
+  }
 }
 </style>
 
