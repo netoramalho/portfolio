@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="wrap">
     <ThemeSwitcher />
     <Cover />
     <Projects :projects="projects" />
@@ -9,6 +9,9 @@
 </template>
 
 <style lang="scss">
+.wrap {
+  overflow: hidden;
+}
 </style>
 
 <script>
