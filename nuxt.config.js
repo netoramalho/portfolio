@@ -10,7 +10,7 @@ export default {
     },
     meta: [
       { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1, user-scalable=no' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: 'Checkout my portfolio!' },
       { name: 'theme-color', content: '#ffffff' },
       { property: 'og:image', content: '/ogimage.png' }
