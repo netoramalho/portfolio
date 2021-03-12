@@ -12,7 +12,7 @@
         :key="image"
         :src="require(`~/assets/projects/${image}`)"
         draggable="false"
-        loading="lazy"
+        :loading="playing ? 'eager' : 'lazy'"
       >
     </div>
   </div>
@@ -120,7 +120,8 @@ export default {
     return {
       current: 0,
       viewportImages: [],
-      timer: false
+      timer: false,
+      playing: false
     }
   },
   computed: {
@@ -140,6 +141,7 @@ export default {
   methods: {
     play () {
       this.stop()
+      this.playing = true
       this.timer = setInterval(this.next, 2000)
     },
     stop () {
@@ -147,6 +149,7 @@ export default {
         clearInterval(this.timer)
         this.timer = false
       }
+      this.playing = false
     },
     next () {
       if (this.isSingleImage) {
