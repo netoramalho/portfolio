@@ -107,10 +107,5 @@ a {
 
 <script>
 export default {
-  methods: {
-    scrollToContact () {
-      document.getElementById('contact').scrollIntoView(true)
-    }
-  }
 }
 </script>
