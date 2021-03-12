@@ -4,14 +4,54 @@
   "front": "Vue.js, Vuetify, Cypress",
   "back": "PHP/Laravel, MySQL",
   "images": [
-    "conecta/desktop-distribution.webp",
-    "conecta/mobile-distribution.webp",
-    "conecta/desktop-plan.webp",
-    "conecta/mobile-plan.webp",
-    "conecta/desktop-users.webp",
-    "conecta/mobile-users.webp",
-    "conecta/mobile-add-user.webp",
-    "conecta/mobile-more.webp"
+    {
+      "path": "conecta/desktop-distribution.webp",
+      "alt": "Leads distribuition (desktop)",
+      "width": 2216,
+      "height": 1584
+    },
+    {
+      "path": "conecta/mobile-distribution.webp",
+      "alt": "Leads distribuition (mobile)",
+      "width": 1242,
+      "height": 2208
+    },
+    {
+      "path": "conecta/desktop-plan.webp",
+      "alt": "Plan management (desktop)",
+      "width": 2216,
+      "height": 1584
+    },
+    {
+      "path": "conecta/mobile-plan.webp",
+      "alt": "Plan management (mobile)",
+      "width": 1242,
+      "height": 2208
+    },
+    {
+      "path": "conecta/desktop-users.webp",
+      "alt": "User management (desktop)",
+      "width": 2216,
+      "height": 1584
+    },
+    {
+      "path": "conecta/mobile-users.webp",
+      "alt": "User management (mobile)",
+      "width": 1242,
+      "height": 2208
+    },
+    {
+      "path": "conecta/mobile-add-user.webp",
+      "alt": "Invite user (mobile)",
+      "width": 1242,
+      "height": 2208
+    },
+    {
+      "path": "conecta/mobile-more.webp",
+      "alt": "More menu (mobile)",
+      "width": 1242,
+      "height": 2208
+    }
   ],
   "date": "2020-02-01"
 }

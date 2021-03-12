@@ -4,11 +4,36 @@
   "front": "AngularJS, Material, TitaniumJS",
   "back": "NodeJS, Express, MongoDB",
   "images": [
-    "imoobiliario/desktop-list.webp",
-    "imoobiliario/desktop-detail.webp",
-    "imoobiliario/mobile-menu.webp",
-    "imoobiliario/mobile-list.webp",
-    "imoobiliario/mobile-detail.webp"
+    {
+      "path": "imoobiliario/desktop-list.webp",
+      "alt": "Properties list (desktop)",
+      "width": 683,
+      "height": 536
+    },
+    {
+      "path": "imoobiliario/desktop-detail.webp",
+      "alt": "Property detail (desktop)",
+      "width": 363,
+      "height": 607
+    },
+    {
+      "path": "imoobiliario/mobile-menu.webp",
+      "alt": "Mobile menu",
+      "width": 363,
+      "height": 607
+    },
+    {
+      "path": "imoobiliario/mobile-list.webp",
+      "alt": "Properties list (mobile)",
+      "width": 363,
+      "height": 607
+    },
+    {
+      "path": "imoobiliario/mobile-detail.webp",
+      "alt": "Property detail (mobile)",
+      "width": 363,
+      "height": 607
+    }
   ],
   "date": "2016-01-01"
 }

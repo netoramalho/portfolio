@@ -4,14 +4,54 @@
   "front": "Angular, Material",
   "back": "PHP/Laravel, PostgreSQL",
   "images": [
-    "gsp/menu-desktop.webp",
-    "gsp/menu-mobile.webp",
-    "gsp/location-desktop.webp",
-    "gsp/location-mobile.webp",
-    "gsp/hours-desktop.webp",
-    "gsp/hours-mobile.webp",
-    "gsp/team-desktop.webp",
-    "gsp/team-mobile.webp"
+    {
+      "path": "gsp/menu-desktop.webp",
+      "alt": "Menu (desktop)",
+      "width": 1108,
+      "height": 849
+    },
+    {
+      "path": "gsp/menu-mobile.webp",
+      "alt": "Menu (mobile)",
+      "width": 1242,
+      "height": 2208
+    },
+    {
+      "path": "gsp/location-desktop.webp",
+      "alt": "Manage locations (desktop)",
+      "width": 1108,
+      "height": 849
+    },
+    {
+      "path": "gsp/location-mobile.webp",
+      "alt": "Manage locations (mobile)",
+      "width": 1242,
+      "height": 2208
+    },
+    {
+      "path": "gsp/hours-desktop.webp",
+      "alt": "Business hours (desktop)",
+      "width": 1108,
+      "height": 849
+    },
+    {
+      "path": "gsp/hours-mobile.webp",
+      "alt": "Business hours (mobile)",
+      "width": 1242,
+      "height": 2208
+    },
+    {
+      "path": "gsp/team-desktop.webp",
+      "alt": "Team (mobile)",
+      "width": 1108,
+      "height": 849
+    },
+    {
+      "path": "gsp/team-mobile.webp",
+      "alt": "Team (mobile)",
+      "width": 1242,
+      "height": 2208
+    }
   ],
   "date": "2019-12-01"
 }

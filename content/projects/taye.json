@@ -3,7 +3,12 @@
   "description": "An Eye Doctor Finder interface for Think About Your Eyes.",
   "front": "Vue.js, Leaflet",
   "images": [
-    "eye-doctor-finder.webp"
+    {
+      "path": "eye-doctor-finder.webp",
+      "alt": "Find a Doctor",
+      "width": 1951,
+      "height": 1341
+    }
   ],
   "date": "2019-10-01"
 }

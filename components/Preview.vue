@@ -9,8 +9,11 @@
       <img
         v-for="(image, index) in viewportImages"
         v-show="index === 0"
-        :key="image"
-        :src="require(`~/assets/projects/${image}`)"
+        :key="index"
+        :src="require(`~/assets/projects/${image.path}`)"
+        :width="image.width"
+        :height="image.height"
+        :alt="image.alt"
         draggable="false"
         :loading="playing ? 'eager' : 'lazy'"
       >
@@ -51,6 +54,8 @@
       max-height: 90%;
       max-width: 75%;
       user-select: none;
+      width: auto;
+      height: auto;
     }
   }
 }
