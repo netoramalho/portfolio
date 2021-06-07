@@ -6,17 +6,18 @@
       </div>
     </div>
     <div class="images">
-      <img
-        v-for="(image, index) in viewportImages"
-        v-show="index === 0"
+      <nuxt-img
+        v-for="(image, index) in images"
+        v-show="index === current"
         :key="index"
-        :src="require(`~/assets/projects/${image.path}`)"
+        :src="`/projects/${image.path}`"
         :width="image.width"
         :height="image.height"
+        sizes="md:700px lg:1000px"
         :alt="image.alt"
         draggable="false"
         :loading="playing ? 'eager' : 'lazy'"
-      >
+      />
     </div>
   </div>
 </template>
@@ -124,7 +125,6 @@ export default {
   data () {
     return {
       current: 0,
-      viewportImages: [],
       timer: false,
       playing: false
     }
@@ -161,11 +161,7 @@ export default {
         return false
       }
 
-      this.viewportImages.shift()
-
       this.current = this.nextImage
-
-      this.viewportImages.push(this.images[this.nextImage])
     },
     visibilityChanged (isVisible) {
       isVisible ? this.play() : this.stop()
