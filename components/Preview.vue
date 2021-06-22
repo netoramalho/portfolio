@@ -13,7 +13,7 @@
         :src="`/projects/${image.path}`"
         :width="image.width"
         :height="image.height"
-        sizes="sm:400px md:700px lg:1000px"
+        sizes="xs:310px sm:620px xl:930px"
         :alt="image.alt"
         draggable="false"
         :loading="playing ? 'eager' : 'lazy'"
