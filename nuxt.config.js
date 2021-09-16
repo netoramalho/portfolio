@@ -55,8 +55,13 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/eslint
     '@nuxtjs/eslint-module',
-    '@nuxt/image'
+    '@nuxt/image',
+    'nuxt-delay-hydration'
   ],
+
+  delayHydration: {
+    mode: 'init'
+  },
 
   // Modules (https://go.nuxtjs.dev/config-modules)
   modules: [

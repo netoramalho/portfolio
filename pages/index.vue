@@ -2,9 +2,11 @@
   <div class="wrap">
     <ThemeSwitcher />
     <Cover />
-    <Projects :projects="projects" />
-    <Contact />
-    <Footer />
+    <delay-hydration>
+      <Projects :projects="projects" />
+      <Contact />
+      <Footer />
+    </delay-hydration>
   </div>
 </template>
 
