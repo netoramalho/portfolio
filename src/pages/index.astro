@@ -1,0 +1,41 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import Contact from '../components/Contact.astro'
+import Cover from '../components/Cover.astro'
+import Footer from '../components/Footer.astro'
+import Projects from '../components/Projects.astro'
+import ThemeSwitcher from '../components/ThemeSwitcher.astro'
+
+interface ProjectData {
+  name: string
+  description: string
+  front?: string
+  back?: string
+  date: string
+  images: {
+    path: string
+    alt: string
+    width: number
+    height: number
+  }[]
+}
+
+const projectModules = import.meta.glob('../../content/projects/*.json', { eager: true })
+const projects = Object.values(projectModules)
+  .map((module) => (module as { default: ProjectData }).default)
+  .sort((a, b) => b.date.localeCompare(a.date))
+---
+
+<BaseLayout>
+  <main class="wrap">
+    <ThemeSwitcher />
+    <Cover />
+    <Projects {projects} />
+    <Contact />
+    <Footer />
+  </main>
+</BaseLayout>
+
+<style>
+  .wrap { overflow: hidden; }
+</style>

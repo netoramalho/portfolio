@@ -1,0 +1,69 @@
+---
+import Preview from './Preview.astro'
+
+interface Image {
+  path: string
+  alt: string
+  width: number
+  height: number
+}
+
+interface Props {
+  reverse?: boolean
+  project: {
+    name: string
+    description: string
+    front?: string
+    back?: string
+    images: Image[]
+  }
+}
+
+const { reverse = false, project } = Astro.props
+---
+
+<article class:list={['project', { reverse }]} data-aos="zoom-out-up" data-aos-delay="450">
+  <Preview images={project.images} />
+  <div class="description">
+    <div class="wrap">
+      <h3 class="headline2">{project.name}</h3>
+      <div class="subtitle">{project.description}</div>
+      {project.front && <div class="stack"><div class="category">FRONT-END</div><div class="tech">{project.front}</div></div>}
+      {project.back && <div class="stack"><div class="category">BACK-END</div><div class="tech">{project.back}</div></div>}
+    </div>
+  </div>
+</article>
+
+<style lang="scss">
+  .project {
+    display: flex;
+    flex-flow: row wrap;
+    width: 100%;
+    padding-bottom: 5vw;
+
+    @media screen and (min-width: 851px) {
+      &.reverse { flex-direction: row-reverse; .description { flex-direction: row-reverse; } }
+    }
+  }
+
+  .description {
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    width: 40%;
+    margin: 0 -5%;
+    text-align: left;
+
+    .wrap { max-width: 500px; }
+    .stack {
+      margin-top: 40px;
+      color: rgba(var(--text), 1);
+      .category { font-size: 14px; font-weight: 500; }
+      .tech { margin-top: 5px; font-size: clamp(0.938rem, 1.25vw, 1.25rem); letter-spacing: 0.11em; }
+    }
+  }
+
+  @media screen and (max-width: 850px) {
+    .description { width: 100%; margin: 20px 0; .wrap { max-width: 100%; } }
+  }
+</style>

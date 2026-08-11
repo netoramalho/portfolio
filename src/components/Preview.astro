@@ -1,0 +1,148 @@
+---
+interface Image {
+  path: string
+  alt: string
+  width: number
+  height: number
+}
+
+interface Props {
+  images: Image[]
+}
+
+const { images } = Astro.props
+const isSingleImage = images.length <= 1
+---
+
+<div class="preview" data-preview>
+  {
+    !isSingleImage && (
+      <div class="indicator" aria-hidden="true">
+        {images.map((_, index) => (
+          <div class:list={['bar', { current: index === 0 }]} data-preview-indicator>
+            <div class="in-progress"></div>
+          </div>
+        ))}
+      </div>
+    )
+  }
+  <div class="images">
+    {images.map((image, index) => (
+      <img
+        src={`/projects/${image.path}`}
+        width={image.width}
+        height={image.height}
+        sizes="(min-width: 1280px) 930px, (min-width: 768px) 688px, 344px"
+        alt={image.alt}
+        draggable="false"
+        loading={index === 0 ? 'eager' : 'lazy'}
+        hidden={index !== 0}
+        data-preview-image
+      />
+    ))}
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-preview]').forEach((preview) => {
+    const images = Array.from(preview.querySelectorAll<HTMLImageElement>('[data-preview-image]'))
+    const indicators = Array.from(preview.querySelectorAll<HTMLElement>('[data-preview-indicator]'))
+    if (images.length <= 1) return
+
+    let current = 0
+    let timer: ReturnType<typeof setInterval> | undefined
+
+    const setCurrent = (index: number) => {
+      current = index
+      images.forEach((image, imageIndex) => { image.hidden = imageIndex !== current })
+      indicators.forEach((indicator, indicatorIndex) => {
+        indicator.classList.toggle('active', indicatorIndex < current)
+        indicator.classList.toggle('current', indicatorIndex === current && timer !== undefined)
+      })
+    }
+
+    const stop = () => {
+      if (timer) clearInterval(timer)
+      timer = undefined
+      preview.classList.remove('playing')
+      setCurrent(current)
+    }
+
+    const play = () => {
+      stop()
+      preview.classList.add('playing')
+      timer = setInterval(() => setCurrent((current + 1) % images.length), 2000)
+      setCurrent(current)
+    }
+
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) play()
+      else stop()
+    }, { threshold: 0.9 })
+
+    observer.observe(preview)
+  })
+</script>
+
+<style lang="scss">
+  .preview {
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    width: 65%;
+    height: 38vw;
+    overflow: hidden;
+    border-radius: 10px;
+    background: rgba(var(--secondary), 0.9);
+    user-select: none;
+    transition: all 0.2s ease-in-out;
+
+    &.playing { background: rgba(var(--secondary), 1); }
+
+    .images {
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      height: 90%;
+      max-height: inherit;
+
+      img { max-width: 75%; max-height: 90%; width: auto; height: auto; user-select: none; }
+    }
+  }
+
+  .indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 80%;
+    height: 10%;
+    margin: auto;
+
+    .bar {
+      flex: 1;
+      max-width: 100px;
+      height: 4px;
+      margin: clamp(3px, 1vw, 8px);
+      overflow: hidden;
+      border-radius: 3px;
+      background: rgba(var(--text), 0.3);
+
+      .in-progress { width: 0; height: 100%; background: rgba(var(--text), 1); }
+      &.active { background: rgba(var(--text), 1); }
+      &.current .in-progress { width: 100%; transition: width 2s ease-in-out; }
+    }
+  }
+
+  @media screen and (max-width: 850px) {
+    .preview {
+      width: 100vw;
+      height: 50vh;
+      margin: 0 -8vw;
+      border-radius: 0;
+
+      .images { align-items: center; img { max-width: 85%; } }
+    }
+  }
+</style>

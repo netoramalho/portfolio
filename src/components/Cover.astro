@@ -1,0 +1,75 @@
+<header>
+  <div class="content">
+    <div class="greeting">Hey! I am</div>
+    <h1 class="headline">Neto Ramalho</h1>
+    <div class="subtitle about">a self-taught developer based in Curitiba, Brazil</div>
+    <div class="wrap-btn"><a href="#contact">Get In Touch</a></div>
+  </div>
+</header>
+
+<style lang="scss">
+  @keyframes scaleUp {
+    from { transform: scale(1.2); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+
+  @keyframes slideUp {
+    from { transform: translateY(20%); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+
+  header {
+    position: relative;
+    min-height: 90vh;
+    min-height: min(100vw, 100vh);
+    display: flex;
+    align-items: center;
+    background-color: var(--background);
+    background-image: var(--cover-image);
+    background-repeat: no-repeat;
+    background-position: bottom center;
+    background-size: cover;
+    transform: scale(1.2);
+    opacity: 0;
+    animation: scaleUp 1s forwards;
+
+    .content {
+      margin-bottom: var(--cover-margin);
+      transform: translateY(20%);
+      opacity: 0;
+      animation: slideUp 1s 1s forwards;
+    }
+
+    @media screen and (max-width: 500px) {
+      align-items: flex-end;
+      margin-bottom: 150px;
+      background-position: 60%;
+
+      .content { margin-bottom: -120px; }
+    }
+  }
+
+  .greeting {
+    font-size: clamp(0.875rem, 1.111vw, 1.125rem);
+    color: rgba(var(--primary), 1);
+    font-weight: 400;
+    padding-bottom: 3px;
+  }
+
+  .about { margin: 5px 0 25px; }
+
+  a {
+    display: inline-block;
+    border: rgba(var(--primary), 1) solid 1px;
+    border-radius: 4px;
+    padding: 9px 21px;
+    background: transparent;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    color: rgba(var(--primary), 1);
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+
+    &:hover { background: rgba(var(--primary), 0.1); }
+  }
+</style>

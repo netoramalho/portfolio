@@ -3,32 +3,19 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "nuxt",
-    "build": "nuxt build",
-    "start": "nuxt start",
-    "generate": "nuxt generate --modern",
-    "lint:js": "eslint --ext .js,.vue --ignore-path .gitignore .",
-    "lint": "npm run lint:js",
-    "storybook": "npx nuxt storybook"
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check"
   },
   "dependencies": {
-    "@nuxt/content": "^1.11.0",
     "aos": "^2.3.4",
-    "nuxt": "^2.14.6",
-    "vue-observe-visibility": "^0.4.6"
+    "astro": "^7.2.1"
   },
   "devDependencies": {
-    "@nuxt/image": "^0.4.14",
-    "@nuxtjs/eslint-config": "^3.1.0",
-    "@nuxtjs/eslint-module": "^2.0.0",
-    "@nuxtjs/google-fonts": "^1.2.0",
-    "@nuxtjs/storybook": "^3.2.0",
-    "babel-eslint": "^10.1.0",
-    "core-js": "^3.6.5",
-    "eslint": "^7.10.0",
-    "eslint-plugin-nuxt": "^1.0.0",
-    "node-sass": "^5.0.0",
-    "nuxt-delay-hydration": "^0.2.4",
-    "sass-loader": "^10.1.0"
+    "@astrojs/check": "^0.9.4",
+    "@types/aos": "^3.0.8",
+    "sass": "^1.93.2",
+    "typescript": "^5.9.3"
   }
 }

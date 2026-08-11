@@ -1,0 +1,55 @@
+<button class="switch" type="button" aria-label="Switch colour theme" data-theme-switch>
+  <svg data-theme-icon fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+  </svg>
+  <span data-theme-label>Light mode</span>
+</button>
+
+<script>
+  const switcher = document.querySelector<HTMLButtonElement>('[data-theme-switch]')
+  const icon = document.querySelector<SVGElement>('[data-theme-icon]')
+  const label = document.querySelector<HTMLElement>('[data-theme-label]')
+  const sun = '<path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />'
+  const moon = '<path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />'
+
+  switcher?.addEventListener('click', () => {
+    const nextTheme = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light'
+    document.documentElement.dataset.theme = nextTheme
+    if (icon) icon.innerHTML = nextTheme === 'dark' ? sun : moon
+    if (label) label.textContent = nextTheme === 'dark' ? 'Light mode' : 'Dark mode'
+  })
+</script>
+
+<style lang="scss">
+  .switch {
+    display: flex;
+    align-items: center;
+    position: fixed;
+    right: 30px;
+    top: 30px;
+    z-index: 3000;
+    max-width: 150px;
+    overflow: hidden;
+    border: 0;
+    border-radius: 8px;
+    padding: 10px 12px;
+    background: rgba(37, 48, 50, 0.7);
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(4px);
+    color: white;
+    cursor: pointer;
+    font: inherit;
+    font-size: 14px;
+    transition: all 0.3s ease-in-out;
+
+    &:hover { background: rgba(37, 48, 50, 0.9); }
+  }
+
+  svg { width: 20%; }
+  span { width: 80%; }
+
+  @media screen and (max-width: 850px) {
+    svg { width: 20px; height: 20px; }
+    span { display: none; }
+  }
+</style>
