@@ -1,0 +1,256 @@
+---
+import { FIRST_YEAR, currentYear, GITHUB_HANDLE, type CalendarResult } from '../lib/contributions'
+interface Props { result: CalendarResult; year: number }
+const { result: { calendar, stale, maxAge }, year } = Astro.props
+const leadingDays = calendar ? new Date(`${calendar.days[0].date}T12:00:00Z`).getUTCDay() : 0
+const weeks = calendar ? Math.ceil((leadingDays + calendar.days.length) / 7) : 53
+const monthLabels = calendar?.days.flatMap((day, index) => {
+  const date = new Date(`${day.date}T12:00:00Z`)
+  return date.getUTCDate() === 1
+    ? [{ label: date.toLocaleDateString('en', { month: 'short', timeZone: 'UTC' }), column: Math.floor((index + leadingDays) / 7) + 1 }]
+    : []
+}) ?? []
+const today = new Intl.DateTimeFormat('en-CA', { year: 'numeric', month: '2-digit', day: '2-digit', timeZone: 'America/Sao_Paulo' }).format(new Date())
+---
+
+<section class="contributions" id="contributions" data-year={year} data-min-year={FIRST_YEAR} data-max-year={currentYear()} data-expires-at={Date.now() + maxAge * 1000} aria-labelledby="contributions-title">
+  <div class="section-top">
+    <h2 id="contributions-title">A little, every day.</h2>
+    <form method="get" action="/#contributions" class="year-picker" aria-label="Contribution year">
+      <button type="submit" name="year" value={year - 1} data-direction="previous" aria-label="Previous year" disabled={year <= FIRST_YEAR}><svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m10 4-4 4 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg></button>
+      <span class="year-label" aria-live="polite">{year}</span>
+      <button type="submit" name="year" value={year + 1} data-direction="next" aria-label="Next year" disabled={year >= currentYear()}><svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m6 4 4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg></button>
+    </form>
+  </div>
+  <div class="calendar-card">
+    {calendar ? <>
+      <div class="calendar-scroll" tabindex="0" role="region" aria-label="GitHub contribution calendar, scroll horizontally on small screens">
+        <div class="calendar-inner" style={`--weeks:${weeks}`}>
+          <div class="months" aria-hidden="true">{monthLabels.map(month => <span style={`grid-column:${month.column}`}>{month.label}</span>)}</div>
+          <div class="calendar" aria-label={`${calendar.total.toLocaleString('en')} ${calendar.total === 1 ? 'contribution' : 'contributions'} in ${year}`}>
+            {Array.from({ length: leadingDays }, () => <span class="empty-day" aria-hidden="true"></span>)}
+            {calendar.days.map((day, index) => {
+              const label = `${day.count === 0 ? 'No' : day.count} ${day.count === 1 ? 'contribution' : 'contributions'} on ${new Date(`${day.date}T12:00:00Z`).toLocaleDateString('en', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' })}`
+              return <span class:list={['day', { future: day.date > today }]} data-level={day.level} data-tooltip={day.date > today ? `${day.date}, upcoming` : label} tabindex={day.date > today ? undefined : -1} style={`--column:${Math.floor((index + leadingDays) / 7)}`} aria-label={day.date > today ? `${day.date}, upcoming` : label}></span>
+            })}
+          </div>
+        </div>
+      </div>
+      <div class="calendar-bottom"><p><strong>{calendar.total.toLocaleString('en')}</strong> {calendar.total === 1 ? 'contribution' : 'contributions'} in {year}</p><div class="legend" aria-label="Contribution intensity from less to more"><span>Less</span>{[0, 1, 2, 3, 4].map(level => <i data-level={level}></i>)}<span>More</span></div></div>
+    </> : <p class="unavailable">GitHub activity is temporarily unavailable. <a href={`https://github.com/${GITHUB_HANDLE}?tab=overview&from=${year}-01-01&to=${year}-12-31`} target="_blank" rel="noreferrer">View {year} on GitHub ↗</a></p>}
+  </div>
+  <div class="calendar-source">
+    <a href={`https://github.com/${GITHUB_HANDLE}`} target="_blank" rel="noreferrer">@{GITHUB_HANDLE}</a>
+    {calendar && <span>{stale ? 'Last available update' : 'Updated'} <time datetime={calendar.updatedAt}>{new Date(calendar.updatedAt).toLocaleDateString('en', { month: 'short', day: 'numeric', timeZone: 'America/Sao_Paulo' })}</time></span>}
+  </div>
+  <div class="day-tooltip" id="contribution-tooltip" role="tooltip" hidden></div>
+</section>
+
+<script>
+  const region = document.querySelector<HTMLElement>('#contributions')!
+  const previous = region.querySelector<HTMLButtonElement>('[data-direction="previous"]')!
+  const next = region.querySelector<HTMLButtonElement>('[data-direction="next"]')!
+  const yearLabel = region.querySelector<HTMLElement>('.year-label')!
+  const minYear = Number(region.dataset.minYear)
+  const maxYear = Number(region.dataset.maxYear)
+  let selected = Number(region.dataset.year)
+  let rendered = selected
+  let requestId = 0
+  type CachedCalendar = { card: string; source: string; expires: number }
+  const calendars = new Map<number, CachedCalendar>()
+  const requests = new Map<number, Promise<CachedCalendar>>()
+  const storageKey = (year: number) => `neto-calendar-v2-${year}`
+
+  function store(year: number, entry: CachedCalendar) {
+    calendars.set(year, entry)
+    try { sessionStorage.setItem(storageKey(year), JSON.stringify(entry)) } catch { /* Cache still works in memory. */ }
+  }
+  store(selected, {
+    card: region.querySelector('.calendar-card')!.innerHTML,
+    source: region.querySelector('.calendar-source')!.innerHTML,
+    expires: Number(region.dataset.expiresAt)
+  })
+  for (let year = minYear; year <= maxYear; year++) {
+    if (year === selected) continue
+    try {
+      const entry = JSON.parse(sessionStorage.getItem(storageKey(year)) ?? 'null') as CachedCalendar | null
+      if (entry && typeof entry.card === 'string' && typeof entry.source === 'string' && entry.expires > Date.now()) calendars.set(year, entry)
+    } catch { /* Ignore old or unavailable browser storage. */ }
+  }
+
+  function load(year: number): Promise<CachedCalendar> {
+    const cached = calendars.get(year)
+    if (cached && cached.expires > Date.now()) return Promise.resolve(cached)
+    const pending = requests.get(year)
+    if (pending) return pending
+    const url = new URL(window.location.href)
+    url.searchParams.set('year', String(year))
+    url.hash = ''
+    const request = (async () => {
+      try {
+        const response = await fetch(url, { headers: { Accept: 'text/html' } })
+        if (!response.ok) throw new Error('Calendar request failed')
+        const page = new DOMParser().parseFromString(await response.text(), 'text/html')
+        const calendar = page.querySelector<HTMLElement>('#contributions')
+        if (!calendar || Number(calendar.dataset.year) !== year) throw new Error('Wrong calendar year')
+        const entry = {
+          card: calendar.querySelector('.calendar-card')!.innerHTML,
+          source: calendar.querySelector('.calendar-source')!.innerHTML,
+          expires: Number(calendar.dataset.expiresAt)
+        }
+        store(year, entry)
+        return entry
+      } finally { requests.delete(year) }
+    })()
+    requests.set(year, request)
+    return request
+  }
+
+  function updateControls() {
+    yearLabel.textContent = String(selected)
+    previous.value = String(selected - 1)
+    next.value = String(selected + 1)
+    previous.disabled = selected <= minYear
+    next.disabled = selected >= maxYear
+  }
+  function prepareCalendar() {
+    const scroll = region.querySelector<HTMLElement>('.calendar-scroll')
+    const days = [...(scroll?.querySelectorAll<HTMLElement>('.day:not(.future)') ?? [])]
+    const latest = days.at(-1)
+    if (scroll && latest) scroll.scrollLeft = Math.max(0, latest.offsetLeft - scroll.offsetLeft - scroll.clientWidth + 20)
+    // One tab stop for the grid; arrow keys explore individual days.
+    if (days[0]) days[0].tabIndex = 0
+  }
+  function display(year: number, entry: CachedCalendar) {
+    hideTooltip()
+    region.querySelector('.calendar-card')!.innerHTML = entry.card
+    region.querySelector('.calendar-source')!.innerHTML = entry.source
+    region.dataset.year = String(year)
+    rendered = year
+    const url = new URL(window.location.href)
+    url.searchParams.set('year', String(year))
+    history.replaceState(null, '', url)
+    prepareCalendar()
+  }
+  region.querySelector('form')!.addEventListener('submit', async event => {
+    const button = (event as SubmitEvent).submitter
+    if (!(button instanceof HTMLButtonElement) || button.disabled) return
+    event.preventDefault()
+    selected = Number(button.value)
+    const target = selected
+    const id = ++requestId
+    updateControls()
+    const cached = calendars.get(target)
+    if (cached && cached.expires > Date.now()) {
+      display(target, cached)
+      region.removeAttribute('aria-busy')
+      return
+    }
+    region.setAttribute('aria-busy', 'true')
+    try {
+      const entry = await load(target)
+      if (id === requestId) display(target, entry)
+    } catch {
+      if (id === requestId) { selected = rendered; updateControls() }
+    } finally {
+      if (id === requestId) region.removeAttribute('aria-busy')
+    }
+  })
+
+  const tooltip = region.querySelector<HTMLElement>('.day-tooltip')!
+  let activeDay: HTMLElement | null = null
+  function hideTooltip() {
+    activeDay?.removeAttribute('aria-describedby')
+    activeDay = null
+    tooltip.hidden = true
+  }
+  function showTooltip(day: HTMLElement) {
+    activeDay?.removeAttribute('aria-describedby')
+    activeDay = day
+    tooltip.textContent = day.dataset.tooltip ?? ''
+    tooltip.hidden = false
+    day.setAttribute('aria-describedby', tooltip.id)
+    const rect = day.getBoundingClientRect()
+    const bounds = tooltip.getBoundingClientRect()
+    const center = Math.max(bounds.width / 2 + 8, Math.min(innerWidth - bounds.width / 2 - 8, rect.left + rect.width / 2))
+    const below = rect.top < bounds.height + 14
+    tooltip.style.left = `${center}px`
+    tooltip.style.top = `${below ? rect.bottom + 9 : rect.top - bounds.height - 9}px`
+    tooltip.dataset.below = String(below)
+    tooltip.style.setProperty('--arrow-x', `${rect.left + rect.width / 2 - center + bounds.width / 2}px`)
+  }
+  region.addEventListener('pointerover', event => {
+    const day = (event.target as Element).closest<HTMLElement>('.day')
+    if (day) showTooltip(day)
+  })
+  region.addEventListener('pointerout', event => {
+    if ((event.target as Element).closest('.day')) hideTooltip()
+  })
+  region.addEventListener('focusin', event => {
+    const day = (event.target as Element).closest<HTMLElement>('.day')
+    if (day) showTooltip(day)
+  })
+  region.addEventListener('focusout', event => { if ((event.target as Element).closest('.day')) hideTooltip() })
+  region.addEventListener('keydown', event => {
+    if (event.key === 'Escape') { hideTooltip(); return }
+    const day = (event.target as Element).closest<HTMLElement>('.day:not(.future)')
+    if (!day) return
+    const days = [...region.querySelectorAll<HTMLElement>('.day:not(.future)')]
+    const index = days.indexOf(day)
+    const delta = { ArrowLeft: -7, ArrowRight: 7, ArrowUp: -1, ArrowDown: 1 }[event.key]
+    if (delta === undefined) return
+    event.preventDefault()
+    const target = days[Math.max(0, Math.min(days.length - 1, index + delta))]
+    day.tabIndex = -1
+    target.tabIndex = 0
+    target.focus({ preventScroll: true })
+    target.scrollIntoView({ block: 'nearest', inline: 'nearest' })
+    showTooltip(target)
+  })
+  window.addEventListener('scroll', hideTooltip, true)
+  window.addEventListener('resize', hideTooltip)
+  prepareCalendar()
+
+  // Warm adjacent calendars first, then the rest, with only two requests at a time.
+  const queue = Array.from({ length: maxYear - minYear + 1 }, (_, i) => minYear + i)
+    .filter(year => year !== selected).sort((a, b) => Math.abs(a - selected) - Math.abs(b - selected))
+  async function prefetch() {
+    while (queue.length) {
+      const year = queue.shift()!
+      try { await load(year) } catch { /* Navigation can retry failed prefetches. */ }
+    }
+  }
+  void prefetch()
+  void prefetch()
+</script>
+
+<style lang="scss">
+  .contributions { margin-top: 55px; scroll-margin-top: 90px; }
+  a { color: inherit; text-decoration: none; }
+  .section-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; h2 { font-size: 14px; font-weight: 500; } }
+  .year-picker { display: flex; align-items: center; gap: 0; user-select: none; -webkit-user-select: none; }
+  .year-label { color: var(--muted); font-size: 11px; font-variant-numeric: tabular-nums; min-width: 28px; text-align: center; }
+  .year-picker button { display: grid; place-items: center; width: 20px; height: 28px; padding: 0; background: transparent; border: 0; color: var(--muted); cursor: pointer; transition: color .15s; }
+  .year-picker button:hover:not(:disabled) { color: var(--ink); }
+  .year-picker button:disabled { opacity: .25; cursor: default; }
+  a:focus-visible, button:focus-visible, .calendar-scroll:focus-visible { outline: 2px solid #91bb73; outline-offset: 2px; border-radius: 3px; }
+  .calendar-card { padding: 17px 17px 13px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; box-shadow: 0 0 0 3px #73796d08; }
+  .calendar-scroll { overflow-x: auto; scrollbar-width: thin; scrollbar-color: var(--line) transparent; padding-bottom: 7px; }
+  .calendar-inner { min-width: 550px; }
+  .months { display: grid; grid-template-columns: repeat(var(--weeks), 1fr); font-size: 9px; color: var(--muted); margin-bottom: 7px; span { white-space: nowrap; } }
+  .calendar { display: grid; grid-template-rows: repeat(7, 1fr); grid-auto-flow: column; grid-template-columns: repeat(var(--weeks), 1fr); gap: 3px; }
+  .day, .empty-day { aspect-ratio: 1; border-radius: 2px; }
+  .day { transition: transform .15s, filter .15s; &:hover { transform: scale(1.45); filter: brightness(1.25); position: relative; z-index: 2; outline: 1px solid var(--ink); } }
+  .future { opacity: .25; }
+  .day:focus-visible { outline: 1px solid var(--ink); outline-offset: 1px; }
+  .day-tooltip { position: fixed; z-index: 4000; transform: translateX(-50%); max-width: calc(100vw - 16px); padding: 9px 12px; border-radius: 7px; background: #3d444d; color: #fff; font-size: 12px; font-weight: 500; line-height: 1.4; letter-spacing: 0; box-shadow: 0 3px 12px #0003; pointer-events: none; }
+  .day-tooltip::after { content: ''; position: absolute; top: 100%; left: var(--arrow-x, 50%); transform: translateX(-50%); border: 5px solid transparent; border-top-color: #3d444d; }
+  .day-tooltip[data-below="true"]::after { top: auto; bottom: 100%; border-top-color: transparent; border-bottom-color: #3d444d; }
+  [data-level="0"] { background: var(--level-0); } [data-level="1"] { background: var(--level-1); } [data-level="2"] { background: var(--level-2); } [data-level="3"] { background: var(--level-3); } [data-level="4"] { background: var(--level-4); }
+  .calendar-bottom { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-top: 7px; color: var(--muted); font-size: 10px; strong { color: var(--ink); font-weight: 500; } }
+  .legend { display: flex; align-items: center; gap: 3px; i { width: 8px; height: 8px; border-radius: 2px; } span:first-child { margin-right: 3px; } span:last-child { margin-left: 3px; } }
+  .calendar-source { display: flex; justify-content: space-between; align-items: center; color: var(--muted); font-size: 10px; margin-top: 11px; a:hover { color: var(--ink); } > span { opacity: .7; font-size: 9px; } }
+  .unavailable { color: var(--muted); font-size: 12px; padding: 25px 0; a { text-decoration: underline; text-underline-offset: 3px; } }
+  @media (max-width: 600px) { .contributions { margin-top: 38px; } .calendar-card { padding: 13px 12px; } .calendar-bottom { flex-wrap: wrap; font-size: 9px; } }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+</style>

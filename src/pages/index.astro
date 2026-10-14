@@ -1,10 +1,18 @@
 ---
+import { getContributions, selectedYear } from '../lib/contributions'
 import BaseLayout from '../layouts/BaseLayout.astro'
 import Contact from '../components/Contact.astro'
 import Cover from '../components/Cover.astro'
+import HeroExploration from '../components/HeroExploration.astro'
 import Footer from '../components/Footer.astro'
 import Projects from '../components/Projects.astro'
 import ThemeSwitcher from '../components/ThemeSwitcher.astro'
+
+const year = selectedYear(Astro.url.searchParams.get('year'))
+const calendarResult = await getContributions(year)
+Astro.response.headers.set('Cache-Control', 'public, max-age=0, must-revalidate')
+Astro.response.headers.set('Netlify-CDN-Cache-Control', `public, durable, s-maxage=${calendarResult.maxAge}`)
+Astro.response.headers.set('Netlify-Vary', 'query=year')
 
 interface ProjectData {
   name: string
@@ -29,6 +37,7 @@ const projects = Object.values(projectModules)
 <BaseLayout>
   <main class="wrap">
     <ThemeSwitcher />
+    <HeroExploration {calendarResult} {year} />
     <Cover />
     <Projects {projects} />
     <Contact />

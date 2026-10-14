@@ -1,0 +1,67 @@
+---
+import PhotoFan from './PhotoFan.astro'
+import ContributionsGraph from './ContributionsGraph.astro'
+import type { CalendarResult } from '../lib/contributions'
+interface Props { calendarResult: CalendarResult; year: number }
+const { calendarResult, year } = Astro.props
+const photographs = [
+  { path: 'mountains.jpg', title: 'Pico Paraná, from Cerro Verde' },
+  { path: 'sand-dune.jpg', title: 'Sand Dune' },
+  { path: 'camping.jpg', title: 'Camping at Pedra da Mina' }
+]
+---
+
+<section class="exploration" aria-labelledby="exploration-name">
+  <div class="intro">
+    <div class="eyebrow"><span class="location-dot"></span> Curitiba, Brazil <span class="eyebrow-line"></span> <span>Developer &amp; curious human</span></div>
+    <div class="identity">
+      <span class="portrait"><img src="/exploration/avatar.jpg" width="56" height="56" alt="Neto Ramalho" /></span>
+      <div><h1 id="exploration-name">Neto Ramalho <span class="hello" aria-hidden="true">✳</span></h1><p class="role">Self-taught developer</p></div>
+    </div>
+
+    <div class="bio">
+      <p>Hey, I’m Neto. I build things for the web with a love for <a class="inline-link" href="#projects-heading">thoughtful interfaces <span aria-hidden="true">↗</span></a> and the little details that make them feel right.</p>
+      <p>I’m a self-taught developer based in Curitiba, Brazil. Always learning, experimenting, and turning ideas into something you can use.</p>
+      <p>When I step away from the screen, you’ll find me chasing mountain views and collecting moments through <PhotoFan photos={photographs} label="my camera" id="camera-photos" />.</p>
+      <p class="connect">Find me on <a class="inline-link" href="https://github.com/netoramalho" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a> or <a class="inline-link" href="https://www.linkedin.com/in/netoramalho/" target="_blank" rel="noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>, or just <a class="inline-link" href="mailto:netto.ramalho@gmail.com">say hello <span aria-hidden="true">↗</span></a>.</p>
+    </div>
+
+    <ContributionsGraph result={calendarResult} {year} />
+
+  </div>
+</section>
+
+
+
+<style lang="scss">
+  .exploration {
+    --ink: #ededeb; --muted: #92938f; --surface: #171817; --line: #2b2d2a;
+    --level-0: #282c28; --level-1: #264b32; --level-2: #387342; --level-3: #58a052; --level-4: #90ca72;
+    position: relative; z-index: 1; background: #101110; color: var(--ink); padding: 108px 24px;
+    font-size: 16px; letter-spacing: -.02em; word-spacing: 0; border-bottom: 1px solid var(--line);
+  }
+  :global([data-theme="light"]) .exploration {
+    --ink: #262c28; --muted: #6a746c; --surface: #f8f9f6; --line: #dde2d8;
+    --level-0: #e4e9df; --level-1: #c4dfb3; --level-2: #8cbb76; --level-3: #539650; --level-4: #2f6439;
+    background: #fcfcf9;
+  }
+  .intro { max-width: 640px; margin: auto; }
+  .eyebrow { display: flex; align-items: center; gap: 9px; color: var(--muted); font-size: 11px; margin-bottom: 32px; letter-spacing: .01em; }
+  .location-dot { width: 5px; height: 5px; background: #a5bc8e; border-radius: 50%; box-shadow: 0 0 0 4px #91a88112; }
+  .eyebrow-line { width: 20px; height: 1px; background: var(--line); margin: 0 3px; }
+  .identity { display: flex; align-items: center; gap: 14px; margin-bottom: 30px; }
+  .portrait { display: block; width: 52px; height: 52px; border-radius: 50%; transition: transform .35s; img { width: 100%; height: 100%; object-fit: cover; border-radius: inherit; filter: saturate(.55); } &:hover { transform: rotate(-6deg) scale(1.08); } }
+  h1 { display: flex; align-items: center; gap: 9px; font-size: 18px; font-weight: 500; letter-spacing: -.035em; }
+  .hello { color: #b2c699; font-size: 19px; display: inline-block; transition: transform .7s; }
+  .identity:hover .hello { transform: rotate(180deg); }
+  .role { color: var(--muted); font-size: 14px; margin-top: 3px; }
+  .bio { color: var(--muted); line-height: 1.8; p + p { margin-top: 18px; } }
+  a { color: inherit; text-decoration: none; }
+  .inline-link { white-space: nowrap; color: var(--ink); text-decoration: underline; text-decoration-color: #777d6e75; text-underline-offset: 4px; text-decoration-thickness: 1px; transition: text-decoration-color .2s; &:hover { text-decoration-color: #a8c78c; } > span:last-child { display: inline-block; font-size: 11px; color: var(--muted); transition: transform .2s; } &:hover > span:last-child { transform: translate(2px, -2px); } }
+  a:focus-visible, button:focus-visible, .calendar-scroll:focus-visible { outline: 2px solid #91bb73; outline-offset: 5px; border-radius: 3px; }
+  @media (max-width: 600px) {
+    .exploration { padding-block: 95px; font-size: 15px; }
+    .eyebrow { font-size: 10px; gap: 7px; }
+  }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+</style>

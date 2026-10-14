@@ -1,0 +1,91 @@
+---
+interface Props {
+  photos: { path: string; title: string }[]
+  label: string
+  id: string
+  variant?: 'inline' | 'footer'
+}
+const { photos, label, id, variant = 'inline' } = Astro.props
+---
+
+<span class:list={['photo-fan', variant]} data-photo-fan>
+  <button type="button" class="fan-trigger" aria-expanded="false" aria-controls={id}>
+    <span class="thumbnails" aria-hidden="true">{photos.map(photo => <img src={`/exploration/${photo.path}`} alt="" />)}</span>
+    <span class="fan-label">{label}</span>
+  </button>
+  <span class="fan-preview" id={id} aria-hidden="true">
+    {photos.map((photo, index) => <span class="photo-card" style={`--i:${index};--angle:${[-10, -2, 9][index]}deg;--x:${[-88, 0, 88][index]}px`}><img src={`/exploration/${photo.path}`} width="230" height="220" alt={photo.title} /><span class="caption">{photo.title}</span></span>)}
+  </span>
+</span>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-photo-fan]').forEach(root => {
+    const trigger = root.querySelector<HTMLButtonElement>('button')!
+    const preview = root.querySelector<HTMLElement>('.fan-preview')!
+    let pinned = false
+    let dismissed = false
+    const setOpen = (open: boolean) => {
+      if (open) {
+        // Keep the fan anchored to its text, but within the viewport on small screens.
+        const center = root.getBoundingClientRect().left + root.getBoundingClientRect().width / 2
+        const half = Math.min(230, (window.innerWidth - 40) / 2)
+        const bounded = Math.max(half + 20, Math.min(window.innerWidth - half - 20, center))
+        root.style.setProperty('--offset', `${bounded - center}px`)
+      }
+      root.dataset.open = String(open)
+      trigger.setAttribute('aria-expanded', String(open))
+      preview.setAttribute('aria-hidden', String(!open))
+    }
+    root.addEventListener('pointerenter', event => {
+      if (event.pointerType === 'mouse' && !dismissed) setOpen(true)
+    })
+    root.addEventListener('pointerleave', () => {
+      dismissed = false
+      if (!pinned && !root.contains(document.activeElement)) setOpen(false)
+    })
+    trigger.addEventListener('focus', () => { if (trigger.matches(':focus-visible')) setOpen(true) })
+    trigger.addEventListener('click', () => { pinned = !pinned; dismissed = !pinned; setOpen(pinned) })
+    root.addEventListener('focusout', event => {
+      if (!pinned && !root.contains(event.relatedTarget as Node)) setOpen(false)
+    })
+    document.addEventListener('click', event => {
+      if (!root.contains(event.target as Node)) { pinned = false; setOpen(false) }
+    })
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape') { pinned = false; dismissed = true; setOpen(false) }
+    })
+    window.addEventListener('resize', () => { pinned = false; setOpen(false) })
+  })
+</script>
+
+<style lang="scss">
+  .photo-fan { position: relative; display: inline-block; z-index: 5; }
+  .photo-fan[data-open="true"] { z-index: 25; }
+  .fan-trigger { display: inline-flex; align-items: center; gap: 7px; padding: 0; border: 0; background: none; color: var(--ink); font: inherit; cursor: pointer; white-space: nowrap; }
+  .fan-trigger:focus-visible { outline: 2px solid #91bb73; outline-offset: 5px; border-radius: 4px; }
+  .fan-label { text-decoration: underline; text-decoration-color: #777d6e75; text-underline-offset: 4px; }
+  .thumbnails { display: inline-flex; padding-left: 5px; align-items: center; vertical-align: middle; }
+  .thumbnails img { width: 22px; height: 26px; object-fit: cover; border: 2px solid var(--surface); border-radius: 4px; margin-left: -6px; transform: rotate(-10deg); transition: transform .45s cubic-bezier(.2,.8,.2,1); }
+  .thumbnails img:nth-child(2) { transform: rotate(-2deg); }
+  .thumbnails img:nth-child(3) { transform: rotate(9deg); }
+  [data-open="true"] .thumbnails img { transform: translateY(-2px) rotate(0deg); }
+  .fan-preview { position: absolute; bottom: calc(100% + 24px); left: 50%; width: 0; height: 250px; transform: translateX(var(--offset, 0px)); pointer-events: none; visibility: hidden; transition: visibility 0s .4s; }
+  .photo-card { position: absolute; bottom: 0; left: -115px; display: block; width: 230px; padding: 7px; background: var(--surface); border: 1px solid var(--line); border-radius: 15px; box-shadow: 0 15px 45px #0005; opacity: 0; transform: translateY(100px) rotate(0deg) scale(.12); transform-origin: 50% 100%; transition: transform .5s cubic-bezier(.22,1.2,.36,1), opacity .18s ease; transition-delay: calc(var(--i) * 25ms); }
+  .photo-card img { display: block; width: 100%; height: 220px; object-fit: cover; border-radius: 9px; }
+  .caption { display: block; padding: 8px 4px 2px; font-size: 10px; line-height: 1.4; color: var(--muted); white-space: nowrap; }
+  [data-open="true"] .fan-preview { visibility: visible; transition-delay: 0s; }
+  [data-open="true"] .photo-card { opacity: 1; transform: translateX(var(--x)) translateY(calc(var(--i) * -5px)) rotate(var(--angle)) scale(1); }
+  .footer { margin-left: auto; font-size: 11px; }
+  .footer .fan-trigger { gap: 24px; }
+  .footer .thumbnails img { width: 53px; height: 42px; border-width: 3px; border-radius: 6px; margin-left: -7px; }
+  @media (max-width: 600px) {
+    .fan-preview { height: 200px; bottom: calc(100% + 22px); }
+    .photo-card { width: 180px; left: -90px; }
+    .photo-card img { height: 170px; }
+    [data-open="true"] .photo-card { transform: translateX(calc(var(--x) * .65)) translateY(calc(var(--i) * -5px)) rotate(var(--angle)) scale(1); }
+    .caption { font-size: 8px; }
+    .footer { width: 100%; }
+    .footer .fan-trigger { width: 100%; justify-content: space-between; }
+  }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; } }
+</style>
